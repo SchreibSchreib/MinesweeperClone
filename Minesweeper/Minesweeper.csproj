@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="data\Font\BlackAsylum.ttf" />
+    <None Remove="data\graphics\Mine.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="data\Font\BlackAsylum.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="data\graphics\Mine.png" />
+  </ItemGroup>
+
+</Project>

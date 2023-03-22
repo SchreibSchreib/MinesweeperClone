@@ -1,0 +1,30 @@
+﻿
+
+
+-Entschlacken des Algorithmusses für die Minenlogik   --- eventuell nicht nötig
+
+-Logik für den Klick auf "keine Mine"
+
+-mehr Logik für den Klick auf "Mine" (Text,Punktestand,Leaderboard etc)
+
+-Algorithmus um alle zusammenhängenden "0"-Felder auf einmal aufzudecken
+
+-LeaderBoard mit .json datei zum auslagern der Benutzerdaten (oder SQLite)
+
+-Buttondesign Resetbutton (bei mousedown ein erschrockenes Gesicht)
+
+-Anpassen des Spielfeldes anhand der Felder
+
+
+
+-----------------------------
+-----Wenn das Ding läuft-----
+-----------------------------
+    |        |        |
+    |        |        |
+    V        V        V
+
+
+-Anpassen des Overlays auf verschiedene Größen
+-mehr animationen
+-eventuelle extramodis? (MineSlayer (finde alle Minen),Minesweeper mit 5-Ecken)
