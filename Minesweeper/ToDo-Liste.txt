@@ -1,13 +1,5 @@
 ﻿
-
-
--Entschlacken des Algorithmusses für die Minenlogik   --- eventuell nicht nötig
-
--Logik für den Klick auf "keine Mine"
-
 -mehr Logik für den Klick auf "Mine" (Text,Punktestand,Leaderboard etc)
-
--Algorithmus um alle zusammenhängenden "0"-Felder auf einmal aufzudecken
 
 -LeaderBoard mit .json datei zum auslagern der Benutzerdaten (oder SQLite)
 

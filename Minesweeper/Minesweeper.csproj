@@ -10,6 +10,12 @@
   <ItemGroup>
     <None Remove="data\Font\BlackAsylum.ttf" />
     <None Remove="data\graphics\Mine.png" />
+    <None Remove="data\graphics\MinesweeperFace.png" />
+    <None Remove="data\graphics\ScaredFace.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +23,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="data\graphics\Mine.png" />
+    <Resource Include="data\graphics\MinesweeperFace.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="data\graphics\ScaredFace.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
