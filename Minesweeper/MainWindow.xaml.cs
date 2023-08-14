@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Minesweeper.data.classes;
 
 namespace Minesweeper
 {
@@ -72,6 +73,7 @@ namespace Minesweeper
             }
 #pragma warning restore CS8602 // Dereferenzierung eines möglichen Nullverweises.
         }
+
         private void NumberValidation(object sender, TextCompositionEventArgs e) 
         {
             Regex checkOnlyNumbers = new Regex("[^0-9]+");
@@ -80,12 +82,17 @@ namespace Minesweeper
 
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
+            Field.firstClick = true;
             Field startField = new Field(Convert.ToInt32(TextBox_X_Direction.Text),Convert.ToInt32(TextBox_Y_Direction.Text));
+            Dictionary<string,Playbutton> loadDictionary = new Dictionary<string,Playbutton>();
             List<Playbutton> playButtons= new List<Playbutton>();
             foreach (KeyValuePair<string,bool> fieldKey in startField.playGround)
             {
-                playButtons.Add(new Playbutton(fieldKey));
+                Playbutton loader = new Playbutton(fieldKey);
+                playButtons.Add(loader);
+                loadDictionary.Add(loader.coordinates, loader);
             }
+            Playbutton.currentSessionButtons = loadDictionary;
             Spielbrett newSession = new Spielbrett(playButtons, Convert.ToInt32(TextBox_X_Direction.Text), Convert.ToInt32(TextBox_Y_Direction.Text));
             Playbutton.currentSession = newSession;
             newSession.Show();
