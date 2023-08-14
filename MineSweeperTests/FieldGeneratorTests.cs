@@ -13,15 +13,16 @@ public class FieldGeneratorTests
     public void CheckLogic_NoMinesAround_ReturnsUnchangedDictionary(int xAxis, int yAxis)
     {
         //Arrange
-        LogicCheckup logicChecker = new LogicCheckup();
-        Dictionary<string, bool> dictrionaryAllValuesFalse = new FieldGenerator().GenerateFieldMap(xAxis, yAxis);
+        Dictionary<string, bool> dictrionaryAllValuesFalse = new FieldGenerator(xAxis, yAxis).PlayGround;
+
         foreach (string key in dictrionaryAllValuesFalse.Keys)
         {
             dictrionaryAllValuesFalse[key] = false;
         }
 
         //Act
-        Dictionary<string, bool> result = logicChecker.CheckLogic(dictrionaryAllValuesFalse);
+        LogicCheckup checkDictionary = new LogicCheckup(dictrionaryAllValuesFalse);
+        Dictionary<string, bool> result = checkDictionary.GetPlaygroundDictionary;
 
         //Assert
         bool areAnyKeyValuesDifferent = false;
@@ -44,11 +45,11 @@ public class FieldGeneratorTests
     public void CheckLogic_MinesAround_ReturnsChangedDictionary(int xAxis, int yAxis)
     {
         //Arrange
-        LogicCheckup logicChecker = new LogicCheckup();
-        Dictionary<string, bool> dictionaryPlayground = new FieldGenerator().GenerateFieldMap(xAxis, yAxis);
+        Dictionary<string, bool> dictionaryPlayground = new FieldGenerator(xAxis, yAxis).PlayGround;
 
         //Act
-        Dictionary<string, bool> result = logicChecker.CheckLogic(dictionaryPlayground);
+        LogicCheckup checkDictionary = new LogicCheckup(dictionaryPlayground);
+        Dictionary<string,bool> result = checkDictionary.GetPlaygroundDictionary;
 
         //Assert
         bool areAnyKeyValuesDifferent = false;

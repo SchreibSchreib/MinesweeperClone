@@ -8,28 +8,30 @@ namespace Minesweeper.data.classes
 {
     public class LogicCheckup
     {
-        public LogicCheckup()
+        public LogicCheckup(Dictionary<string, bool> playgroundDitctionary)
         {
+            GetPlaygroundDictionary = CheckLogic(playgroundDitctionary);
             MaxMines = CalculateMaxMines();
         }
 
         public readonly int MaxMines;
         private Random _random = new Random();
+        public Dictionary<string, bool> GetPlaygroundDictionary { get; private set; }
 
-        public Dictionary<string, bool> CheckLogic(Dictionary<string, bool> playgroundDictionary)
+        private Dictionary<string, bool> CheckLogic(Dictionary<string, bool> rearrangeMines)
         {
-            foreach (KeyValuePair<string, bool> entry in playgroundDictionary)
+            foreach (KeyValuePair<string, bool> entry in rearrangeMines)
             {
 
                 string currentButton = entry.Key;
-                MineCounter minesAroundButton = new MineCounter(currentButton, playgroundDictionary);
+                MineCounter minesAroundButton = new MineCounter(currentButton, rearrangeMines);
 
-                AdjustMines(playgroundDictionary, currentButton, minesAroundButton);
+                ReforgeMines(rearrangeMines, minesAroundButton);
             }
-            return playgroundDictionary;
+            return rearrangeMines;
         }
 
-        private void AdjustMines(Dictionary<string, bool> playgroundDictionary, string currentButton, MineCounter minesAroundButton)
+        private void ReforgeMines(Dictionary<string, bool> playgroundDictionary, MineCounter minesAroundButton)
         {
             while (minesAroundButton.Count > MaxMines)
             {

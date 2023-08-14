@@ -9,7 +9,8 @@ namespace Minesweeper
     {
         public Field(int lengthX, int lengthY)
         {
-            playGround = new FieldGenerator().GenerateFieldMap(lengthX, lengthY);
+            FieldGenerator mapCreation = new FieldGenerator(lengthX, lengthY);
+            playGround = new FieldGenerator(lengthX, lengthY).PlayGround;
         }
         public static bool firstClick = true;
 
