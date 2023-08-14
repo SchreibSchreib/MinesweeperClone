@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Minesweeper.data.classes
 {
-    public class LogicChecker
+    public class LogicCheckup
     {
-        public LogicChecker()
+        public LogicCheckup()
         {
-                MaxMines = CalculateMaxMines();
+            MaxMines = CalculateMaxMines();
         }
 
         public readonly int MaxMines;

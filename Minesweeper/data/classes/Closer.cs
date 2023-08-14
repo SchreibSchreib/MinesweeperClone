@@ -8,11 +8,11 @@ namespace Minesweeper
         public static void closeWindow(Window currentWindow)
         {
             Assembly currentassembly = Assembly.GetExecutingAssembly();
-            foreach (Window win in Application.Current.Windows)
+            foreach (Window window in Application.Current.Windows)
             {
-                if (win.GetType().Assembly == currentassembly && win == currentWindow)
+                if (window.GetType().Assembly == currentassembly && window == currentWindow)
                 {
-                    win.Close();
+                    window.Close();
                 }
             }
         }

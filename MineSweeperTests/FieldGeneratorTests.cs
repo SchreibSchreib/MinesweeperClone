@@ -13,7 +13,7 @@ public class FieldGeneratorTests
     public void CheckLogic_NoMinesAround_ReturnsUnchangedDictionary(int xAxis, int yAxis)
     {
         //Arrange
-        LogicChecker logicChecker = new LogicChecker();
+        LogicCheckup logicChecker = new LogicCheckup();
         Dictionary<string, bool> dictrionaryAllValuesFalse = new FieldGenerator().GenerateFieldMap(xAxis, yAxis);
         foreach (string key in dictrionaryAllValuesFalse.Keys)
         {
@@ -44,7 +44,7 @@ public class FieldGeneratorTests
     public void CheckLogic_MinesAround_ReturnsChangedDictionary(int xAxis, int yAxis)
     {
         //Arrange
-        LogicChecker logicChecker = new LogicChecker();
+        LogicCheckup logicChecker = new LogicCheckup();
         Dictionary<string, bool> dictionaryPlayground = new FieldGenerator().GenerateFieldMap(xAxis, yAxis);
 
         //Act
