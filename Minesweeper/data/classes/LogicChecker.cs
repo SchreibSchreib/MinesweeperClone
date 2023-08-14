@@ -31,29 +31,14 @@ namespace Minesweeper.data.classes
 
         private void AdjustMines(Dictionary<string, bool> playgroundDictionary, string currentButton, MineCounter minesAroundButton)
         {
-            while (minesAroundButton.MinesAround > MaxMines)
+            while (minesAroundButton.Count > MaxMines)
             {
-                List<string> trueValues = GetTrueValues(currentButton, playgroundDictionary);
+                List<string> trueValues = minesAroundButton.PositionOfMines;
                 int index = _random.Next(0, trueValues.Count);
 
                 playgroundDictionary[trueValues[index]] = false;
-                minesAroundButton.MinesAround--;
+                minesAroundButton.Count--;
             }
-        }
-
-        private List<string> GetTrueValues( Dictionary<string, bool> playgroundDictionary)
-        {
-            List<string> trueValues = new List<string>();
-
-            foreach (KeyValuePair<string, bool> entry in playgroundDictionary)
-            {
-                if (entry.Value)
-                {
-                    trueValues.Add(entry.Key);
-                }
-            }
-
-            return trueValues;
         }
 
         private int CalculateMaxMines() => 4; // space for more logic (i.e. difficulty)

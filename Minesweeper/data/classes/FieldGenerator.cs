@@ -8,7 +8,7 @@ namespace Minesweeper.data.classes
 {
     public class FieldGenerator
     {
-        private MineGenerator mineGenerator = new MineGenerator();
+        private MineGenerator _mineGenerator = new MineGenerator();
 
         private LogicChecker _checkFieldLogic = new LogicChecker();
 
@@ -19,7 +19,7 @@ namespace Minesweeper.data.classes
             {
                 for (int loader_y = 0; loader_y < y_axis; loader_y++)
                 {
-                    bool isMine = mineGenerator.MineOrFree;
+                    bool isMine = _mineGenerator.MineOrFree;
                     map.Add(loader_x + " " + loader_y, isMine);
                 }
             }

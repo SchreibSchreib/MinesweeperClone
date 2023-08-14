@@ -10,20 +10,27 @@ namespace Minesweeper.data.classes
     {
         public MineCounter(string currentButton, Dictionary<string, bool> gameField)
         {
-            _currentButton = currentButton;
+            CurrentButton = currentButton;
             GameField = gameField;
-            MinesAround = CountMinesAround();
+            Count = CountMinesAround();
         }
 
-        public int MinesAround;
-        private string _currentButton;
+        private List<string> _positionOfMines = new List<string>();
+
+        public List<string> PositionOfMines
+        {
+            get { return _positionOfMines; }
+        }
+
+        public int Count { get; set; }
+        public readonly string CurrentButton;
         private Dictionary<string, bool> GameField;
 
 
         private int CountMinesAround()
         {
             int mineCount = 0;
-            int[] searchScope = GetSearchScope(_currentButton);
+            int[] searchScope = ScopeFinder.GetSearchScope(CurrentButton);
 
             for (int x_axis = searchScope[0]; x_axis <= searchScope[2]; x_axis++)
             {
@@ -31,12 +38,17 @@ namespace Minesweeper.data.classes
                 {
                     string position = x_axis + " " + y_axis;
 
-                    if (IsValidField(position))
+                    if (IsNoValidField(position))
+                    {
+                        continue;
+                    }
+                    else if (IsNoMine(position))
                     {
                         continue;
                     }
                     else
                     {
+                        PositionOfMines.Add(position);
                         mineCount++;
                     }
                 }
@@ -44,21 +56,9 @@ namespace Minesweeper.data.classes
             return mineCount;
         }
 
-        private int[] GetSearchScope(string currentButton)
-        {
-            int[] coordinates = currentButton.Split(' ').Select(int.Parse).ToArray();
-            int x = coordinates[0];
-            int y = coordinates[1];
+        private bool IsNoValidField(string posInDictionary)
+            => posInDictionary == CurrentButton || !GameField.ContainsKey(posInDictionary);
 
-            int xMin = Math.Max(x - 1, 0);
-            int xMax = Math.Min(x + 1, int.MaxValue);
-            int yMin = Math.Max(y - 1, 0);
-            int yMax = Math.Min(y + 1, int.MaxValue);
-
-            return new int[] { xMin, yMin, xMax, yMax };
-        }
-
-        private bool IsValidField(string posInDictionary)
-            => posInDictionary == _currentButton || !GameField.ContainsKey(posInDictionary);
+        private bool IsNoMine(string posInDictionary) => !GameField[posInDictionary];
     }
 }
