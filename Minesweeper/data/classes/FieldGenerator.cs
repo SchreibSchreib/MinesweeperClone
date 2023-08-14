@@ -10,7 +10,7 @@ namespace Minesweeper.data.classes
     {
         private MineGenerator _mineGenerator = new MineGenerator();
 
-        private LogicChecker _checkFieldLogic = new LogicChecker();
+        private LogicCheckup _checkFieldLogic = new LogicCheckup();
 
         public Dictionary<string, bool> GenerateFieldMap(int x_axis, int y_axis)
         {
