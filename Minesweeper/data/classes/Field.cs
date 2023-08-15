@@ -12,13 +12,13 @@ namespace Minesweeper.data.classes
             PlayGround = new FieldGenerator(lengthX, lengthY).PlayGround;
         }
         public List<GameButton> Buttons { get; private set; }
-        public static bool firstClick = true;
+        public static bool FirstClickOfGame = true;
 
         public Dictionary<string, bool> PlayGround { get; private set; }
 
         private List<GameButton> CreateButtons()
         {
-            List<GameButton> buttons = new List<GameButton>;
+            List<GameButton> buttons = new List<GameButton>();
             foreach (KeyValuePair<string, bool> kvp in PlayGround)
             {
                 int xCoords = int.Parse(kvp.Key.Split(' ')[0]);

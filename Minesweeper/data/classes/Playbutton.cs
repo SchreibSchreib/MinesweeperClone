@@ -45,9 +45,9 @@ namespace Minesweeper.data.classes
         {
             isClicked = true;
             var btn = sender as Playbutton;
-            if (Field.firstClick == true)
+            if (Field.FirstClickOfGame == true)
             {
-                Field.firstClick = false;
+                Field.FirstClickOfGame = false;
                 Spielbrett.timer_start();
                 if (btn.behaviour == true)
                 {
