@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Minesweeper.data.classes
 {
-    internal class Coordinates
+    public class Coordinates
     {
         public Coordinates(int xCoords, int yCoords)
         {

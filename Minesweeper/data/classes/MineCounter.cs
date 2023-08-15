@@ -40,16 +40,12 @@ namespace Minesweeper.data.classes
 
                     if (new FieldCoordsValidator(position,GameField).IsMineAndPositionOfField)
                     {
-                        continue;
-                    }
-                    else if (FieldCoordsValidator.IsNoMine(position))
-                    {
-                        continue;
+                        PositionOfMines.Add(position);
+                        mineCount++;
                     }
                     else
                     {
-                        PositionOfMines.Add(position);
-                        mineCount++;
+                        continue;
                     }
                 }
             }
