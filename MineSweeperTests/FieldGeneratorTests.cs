@@ -21,8 +21,7 @@ public class FieldGeneratorTests
         }
 
         //Act
-        LogicCheckup checkDictionary = new LogicCheckup(dictrionaryAllValuesFalse);
-        Dictionary<string, bool> result = checkDictionary.GetPlaygroundDictionary;
+        Dictionary<string, bool> result = LogicCheckup.Check(dictrionaryAllValuesFalse);
 
         //Assert
         bool areAnyKeyValuesDifferent = false;
@@ -46,17 +45,21 @@ public class FieldGeneratorTests
     {
         //Arrange
         Dictionary<string, bool> dictionaryPlayground = new FieldGenerator(xAxis, yAxis).PlayGround;
+        Dictionary<string, bool> result = new Dictionary<string, bool>();
 
         //Act
-        LogicCheckup checkDictionary = new LogicCheckup(dictionaryPlayground);
-        Dictionary<string,bool> result = checkDictionary.GetPlaygroundDictionary;
+        foreach (KeyValuePair<string, bool> kvp in dictionaryPlayground)
+        {
+            result.Add(kvp.Key, kvp.Value);
+        }
+        result = LogicCheckup.Check(result);
 
         //Assert
         bool areAnyKeyValuesDifferent = false;
 
         foreach (KeyValuePair<string, bool> kvp in result)
         {
-            if (!result[kvp.Key] != kvp.Value)
+            if (dictionaryPlayground[kvp.Key] != kvp.Value)
             {
                 areAnyKeyValuesDifferent = true;
                 break;
