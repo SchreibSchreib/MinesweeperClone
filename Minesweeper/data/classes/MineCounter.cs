@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Minesweeper.data.classes
 {
-    internal class MineCounter
+    public class MineCounter
     {
         public MineCounter(string currentButton, Dictionary<string, bool> gameField)
         {
@@ -38,11 +38,11 @@ namespace Minesweeper.data.classes
                 {
                     string position = x_axis + " " + y_axis;
 
-                    if (IsNoValidField(position))
+                    if (new FieldCoordsValidator(position,GameField).IsMineAndPositionOfField)
                     {
                         continue;
                     }
-                    else if (IsNoMine(position))
+                    else if (FieldCoordsValidator.IsNoMine(position))
                     {
                         continue;
                     }
@@ -55,10 +55,5 @@ namespace Minesweeper.data.classes
             }
             return mineCount;
         }
-
-        private bool IsNoValidField(string posInDictionary)
-            => posInDictionary == CurrentButton || !GameField.ContainsKey(posInDictionary);
-
-        private bool IsNoMine(string posInDictionary) => !GameField[posInDictionary];
     }
 }

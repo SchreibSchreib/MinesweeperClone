@@ -3,17 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Minesweeper
+namespace Minesweeper.data.classes
 {
     public class Field
     {
         public Field(int lengthX, int lengthY)
         {
-            FieldGenerator mapCreation = new FieldGenerator(lengthX, lengthY);
-            playGround = new FieldGenerator(lengthX, lengthY).PlayGround;
+            PlayGround = new FieldGenerator(lengthX, lengthY).PlayGround;
         }
         public static bool firstClick = true;
 
-        public Dictionary<string, bool> playGround;
+        public Dictionary<string, bool> PlayGround { get; private set; }
     }
 }

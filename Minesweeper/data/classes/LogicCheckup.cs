@@ -8,7 +8,7 @@ namespace Minesweeper.data.classes
 {
     public static class LogicCheckup
     {
-        private static Random _random = new Random();
+        private static Random _randomMinePicker = new Random();
         private static int _maxMines = CalculateMaxMines();
 
         public static Dictionary<string, bool> Check(Dictionary<string, bool> rearrangeMines)
@@ -28,12 +28,12 @@ namespace Minesweeper.data.classes
             while (minesAroundButton.Count > _maxMines)
             {
                 List<string> trueValues = minesAroundButton.PositionOfMines;
-                int index = _random.Next(0, trueValues.Count);
+                int index = _randomMinePicker.Next(0, trueValues.Count);
 
                 playgroundDictionary[trueValues[index]] = false;
                 minesAroundButton.Count--;
             }
         }
-        private static int CalculateMaxMines() => 4; // space for more logic (i.e. difficulty)
+        private static int CalculateMaxMines() => 3; // space for more logic (i.e. difficulty)
     }
 }

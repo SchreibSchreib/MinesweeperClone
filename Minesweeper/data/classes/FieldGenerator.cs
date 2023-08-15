@@ -20,7 +20,6 @@ namespace Minesweeper.data.classes
         private MineGenerator _mineGenerator = new MineGenerator();
         private int _highestXAxis;
         private int _highestYAxis;
-        private readonly int _maxMines;
 
         public Dictionary<string, bool> CheckLogicOfPrototype(Dictionary<string,bool> prototypePlayground)
         {

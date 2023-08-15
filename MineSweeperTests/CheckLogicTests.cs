@@ -4,12 +4,12 @@ using Minesweeper.data.classes;
 namespace MineSweeperTests;
 
 [TestFixture]
-public class FieldGeneratorTests
+public class CheckLogicTests
 {
     [TestCase(10, 10)]
     [TestCase(27, 27)]
     [TestCase(13, 70)]
-    [TestCase(1, 1)]
+    [TestCase(100, 100)]
     public void CheckLogic_NoMinesAround_ReturnsUnchangedDictionary(int xAxis, int yAxis)
     {
         //Arrange
@@ -40,7 +40,7 @@ public class FieldGeneratorTests
     [TestCase(37, 37)]
     [TestCase(45, 45)]
     [TestCase(50, 27)]
-    [TestCase(1, 1)]
+    [TestCase(100, 100)]
     public void CheckLogic_MinesAround_ReturnsChangedDictionary(int xAxis, int yAxis)
     {
         //Arrange
@@ -66,5 +66,28 @@ public class FieldGeneratorTests
             }
         }
         Assert.IsTrue(areAnyKeyValuesDifferent);
+    }
+
+    [TestCase(1, 1)]
+    public void CheckLogic_OnlyOneMineAround_ReturnsUnchangedDictionary(int xAxis, int yAxis)
+    {
+        //Arrange
+        Dictionary<string, bool> dictrionaryOnlyOneMine = new FieldGenerator(xAxis, yAxis).PlayGround;
+
+        //Act
+        Dictionary<string, bool> result = LogicCheckup.Check(dictrionaryOnlyOneMine);
+
+        //Assert
+        bool areAnyKeyValuesDifferent = false;
+
+        foreach (KeyValuePair<string, bool> kvp in result)
+        {
+            if (result[kvp.Key] != kvp.Value)
+            {
+                areAnyKeyValuesDifferent = true;
+                break;
+            }
+        }
+        Assert.IsFalse(areAnyKeyValuesDifferent);
     }
 }

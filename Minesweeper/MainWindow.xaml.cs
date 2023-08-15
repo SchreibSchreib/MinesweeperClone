@@ -86,7 +86,7 @@ namespace Minesweeper
             Field startField = new Field(Convert.ToInt32(TextBox_X_Direction.Text),Convert.ToInt32(TextBox_Y_Direction.Text));
             Dictionary<string,Playbutton> loadDictionary = new Dictionary<string,Playbutton>();
             List<Playbutton> playButtons= new List<Playbutton>();
-            foreach (KeyValuePair<string,bool> fieldKey in startField.playGround)
+            foreach (KeyValuePair<string,bool> fieldKey in startField.PlayGround)
             {
                 Playbutton loader = new Playbutton(fieldKey);
                 playButtons.Add(loader);
