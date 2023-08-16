@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Threading;
 
 namespace Minesweeper.data.classes
 {
@@ -24,6 +20,10 @@ namespace Minesweeper.data.classes
 
         public void Handle()
         {
+            if (_isFirstClick)
+            {
+                TimeMeasure stopWatch = new TimeMeasure(new DispatcherTimer());
+            }
             _clickedButton.UpDateButtonInformation();
         }
     }
