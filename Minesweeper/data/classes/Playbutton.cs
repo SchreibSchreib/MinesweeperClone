@@ -28,28 +28,7 @@ namespace Minesweeper.data.classes
                 Background = new SolidColorBrush(Colors.LightGray);
                 thisBackgroundField = Colors.LightGray;
             }
-            fadingColor = new ColorAnimation(Color.FromRgb(100, 100, 100), thisBackgroundField, new Duration(new TimeSpan(5000000)));
-            switch (nearbyMines)
-            {
-                case 0:
-                    Foreground = null;
-                    break;
-                case 1:
-                    Foreground = new SolidColorBrush(Colors.LightGreen);
-                    break;
-                case 2:
-                    Foreground = new SolidColorBrush(Colors.Green);
-                    break;
-                case 3:
-                    Foreground = new SolidColorBrush(Colors.GreenYellow);
-                    break;
-                case 4:
-                    Foreground = new SolidColorBrush(Colors.Yellow);
-                    break;
-                case 5:
-                    Foreground = new SolidColorBrush(Colors.Orange);
-                    break;
-            }
+           
             Click += Playbutton_Click;
             MouseRightButtonUp += Playbutton_MouseRightButtonUp;
             MouseLeave += Playbutton_Leave;
@@ -66,9 +45,9 @@ namespace Minesweeper.data.classes
         {
             isClicked = true;
             var btn = sender as Playbutton;
-            if (Field.firstClick == true)
+            if (Field.FirstClickOfGame == true)
             {
-                Field.firstClick = false;
+                Field.FirstClickOfGame = false;
                 Spielbrett.timer_start();
                 if (btn.behaviour == true)
                 {

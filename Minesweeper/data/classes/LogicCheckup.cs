@@ -6,41 +6,34 @@ using System.Threading.Tasks;
 
 namespace Minesweeper.data.classes
 {
-    public class LogicCheckup
+    public static class LogicCheckup
     {
-        public LogicCheckup()
-        {
-            MaxMines = CalculateMaxMines();
-        }
+        private static Random _randomMinePicker = new Random();
+        private static int _maxMines = CalculateMaxMines();
 
-        public readonly int MaxMines;
-        private Random _random = new Random();
-
-        public Dictionary<string, bool> CheckLogic(Dictionary<string, bool> playgroundDictionary)
+        public static Dictionary<string, bool> Check(Dictionary<string, bool> rearrangeMines)
         {
-            foreach (KeyValuePair<string, bool> entry in playgroundDictionary)
+            foreach (KeyValuePair<string, bool> entry in rearrangeMines)
             {
-
                 string currentButton = entry.Key;
-                MineCounter minesAroundButton = new MineCounter(currentButton, playgroundDictionary);
+                MineCounter minesAroundButton = new MineCounter(currentButton, rearrangeMines);
 
-                AdjustMines(playgroundDictionary, currentButton, minesAroundButton);
+                ReforgeMines(rearrangeMines, minesAroundButton);
             }
-            return playgroundDictionary;
+            return rearrangeMines;
         }
 
-        private void AdjustMines(Dictionary<string, bool> playgroundDictionary, string currentButton, MineCounter minesAroundButton)
+        private static void ReforgeMines(Dictionary<string, bool> playgroundDictionary, MineCounter minesAroundButton)
         {
-            while (minesAroundButton.Count > MaxMines)
+            while (minesAroundButton.Count > _maxMines)
             {
                 List<string> trueValues = minesAroundButton.PositionOfMines;
-                int index = _random.Next(0, trueValues.Count);
+                int index = _randomMinePicker.Next(0, trueValues.Count);
 
                 playgroundDictionary[trueValues[index]] = false;
                 minesAroundButton.Count--;
             }
         }
-
-        private int CalculateMaxMines() => 4; // space for more logic (i.e. difficulty)
+        private static int CalculateMaxMines() => 4; // space for more logic (i.e. difficulty)
     }
 }
