@@ -6,7 +6,25 @@ using System.Threading.Tasks;
 
 namespace Minesweeper.data.classes
 {
-    internal class ClickHandler
+    public class ClickHandler
     {
+        public ClickHandler(GameButton clickedButton, bool isFirstClick)
+        {
+            _isFirstClick = isFirstClick;
+            _clickedButton = clickedButton;
+
+            if (isFirstClick)
+            {
+                Field.FirstClickOfGame = false;
+            }
+        }
+
+        private bool _isFirstClick;
+        private GameButton _clickedButton;
+
+        public void Handle()
+        {
+            _clickedButton.UpDateButtonInformation();
+        }
     }
 }

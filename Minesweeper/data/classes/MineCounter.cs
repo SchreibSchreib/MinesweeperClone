@@ -38,7 +38,7 @@ namespace Minesweeper.data.classes
                 {
                     string position = x_axis + " " + y_axis;
 
-                    if (new FieldCoordsValidator(position,GameField).IsMineAndPositionOfField)
+                    if (new FieldCoordsValidator(CurrentButton,position,GameField).IsMineAndPositionOfField)
                     {
                         PositionOfMines.Add(position);
                         mineCount++;

@@ -13,6 +13,7 @@ namespace Minesweeper.data.classes
         protected GameButton(Coordinates coordOfButton, Dictionary<string, bool> currentGameField)
         {
             Coordinates = coordOfButton;
+            IsClicked = false;
             MinesAround = new MineCounter(coordOfButton.AsString, currentGameField).Count;
             Behaviour = currentGameField[coordOfButton.AsString];
             Foreground = GetSolidColorBrushOfNumber();
@@ -24,19 +25,16 @@ namespace Minesweeper.data.classes
             MouseLeave += PlayButton_MouseLeave;
         }
 
-        private void PlayButton_MouseLeave(object sender, MouseEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+
 
         protected Coordinates Coordinates;
         protected Color ColorOfButton;
         protected int MinesAround;
         protected bool Behaviour;
-        protected bool IsClicked;
+        public bool IsClicked { protected get; set; }
         protected ColorAnimation FadingColor;
 
-        protected SolidColorBrush GetSolidColorBrushOfNumber()
+        protected SolidColorBrush? GetSolidColorBrushOfNumber()
         {
             switch (MinesAround)
             {
@@ -81,12 +79,23 @@ namespace Minesweeper.data.classes
 
         protected void GameButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (!IsClicked)
+            {
+                ClickHandler thisButton = new ClickHandler(this, Field.FirstClickOfGame);
+            }
         }
 
-        private void Playbutton_Leave(object sender, MouseEventArgs e)
+
+        protected void PlayButton_MouseLeave(object sender, MouseEventArgs e)
         {
             Background.BeginAnimation(SolidColorBrush.ColorProperty, FadingColor);
+        }
+
+        public void UpDateButtonInformation()
+        {
+            Background = GetSolidColorBrushOfBackGround();
+            ColorOfButton = GetColorOfButton();
+            FadingColor = GetColorAnimation();
         }
     }
 }

@@ -13,7 +13,6 @@ namespace Minesweeper.data.classes
             _highestXAxis = xAxis;
             _highestYAxis = yAxis;
             PlayGround = CreatePrototypePlayGround();
-            PlayGround = CheckLogicOfPrototype(PlayGround);
         }
 
         public Dictionary<string, bool> PlayGround {  get; private set; }

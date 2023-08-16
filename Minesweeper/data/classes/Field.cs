@@ -10,11 +10,12 @@ namespace Minesweeper.data.classes
         public Field(int lengthX, int lengthY)
         {
             PlayGround = new FieldGenerator(lengthX, lengthY).PlayGround;
+            PlayGround = LogicCheckup.Check(PlayGround);
         }
         public List<GameButton> Buttons { get; private set; }
-        public static bool FirstClickOfGame = true;
-
         public Dictionary<string, bool> PlayGround { get; private set; }
+
+        public static bool FirstClickOfGame = true;
 
         private List<GameButton> CreateButtons()
         {
@@ -25,6 +26,7 @@ namespace Minesweeper.data.classes
                 int yCoords = int.Parse(kvp.Key.Split(' ')[1]);
                 //more Logic for Buttons who inherit from abstract class GameButton
             }
+            return buttons;
         }
     }
 }
