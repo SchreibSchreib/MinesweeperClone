@@ -17,7 +17,7 @@ namespace Minesweeper.data.classes
         }
 
         private DispatcherTimer _seconds;
-        public int TimeInSeconds = 0;
+        public static int TimeInSeconds = 0;
 
         private void Timer_Tick(object? sender, EventArgs e)
         {

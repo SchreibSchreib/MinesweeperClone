@@ -6,7 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace Minesweeper.data.classes
+namespace Minesweeper.data.classes.AbstractClasses
 {
     public abstract class GameButton : Button
     {
@@ -52,6 +52,7 @@ namespace Minesweeper.data.classes
                     return null;
             }
         }
+
         protected SolidColorBrush GetSolidColorBrushOfBackGround()
         {
             if (!IsClicked)
@@ -60,6 +61,7 @@ namespace Minesweeper.data.classes
             }
             return new SolidColorBrush(Colors.LightSlateGray);
         }
+
         protected Color GetColorOfButton()
         {
             if (!IsClicked)
@@ -68,6 +70,7 @@ namespace Minesweeper.data.classes
             }
             return Colors.LightSlateGray;
         }
+
         protected ColorAnimation GetColorAnimation()
         {
             if (!IsClicked)
@@ -77,14 +80,7 @@ namespace Minesweeper.data.classes
             return new ColorAnimation(Color.FromRgb(100, 100, 100), ColorOfButton, new Duration(new TimeSpan(5000000)));
         }
 
-        protected void GameButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (!IsClicked)
-            {
-                ClickHandler thisButton = new ClickHandler(this, Field.FirstClickOfGame);
-            }
-        }
-
+        protected abstract void GameButton_Click(object sender, RoutedEventArgs e);
 
         protected void PlayButton_MouseLeave(object sender, MouseEventArgs e)
         {

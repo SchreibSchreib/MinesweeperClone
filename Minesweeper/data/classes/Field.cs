@@ -1,4 +1,4 @@
-﻿using Minesweeper.data.classes;
+﻿using Minesweeper.data.classes.AbstractClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +14,7 @@ namespace Minesweeper.data.classes
         }
         public List<GameButton> Buttons { get; private set; }
         public Dictionary<string, bool> PlayGround { get; private set; }
+
 
         public static bool FirstClickOfGame = true;
 

@@ -8,5 +8,6 @@ namespace Minesweeper.data.classes
 {
     internal class Difficulty
     {
+        public enum Rank { easy = 1, medium, hard }
     }
 }

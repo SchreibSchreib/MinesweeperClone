@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Minesweeper.data.classes
+namespace Minesweeper.data.classes.InheritedClasses
 {
-    internal class Class1
+    internal class ClickHandlerIsMine
     {
     }
 }
