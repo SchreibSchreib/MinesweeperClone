@@ -14,7 +14,8 @@ namespace Minesweeper.data.classes.InheritedClasses
 
         protected override void GameButton_Click(object sender, RoutedEventArgs e)
         {
-            ClickHandler thisButton = new ClickHandler(this, Field.FirstClickOfGame);
+            ClickHandler thisButton = new ClickHandlerNoMine(this, Field.FirstClickOfGame);
+            BroadSearchAlgorithm broadSearchThisClick = new BroadSearchAlgorithm(this, CurrentGameField, Field.Buttons);
             thisButton.Handle();
         }
     }

@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace Minesweeper.data.classes
 {
-    internal class Points
+    internal static class Points
     {
-        public Points() 
-        {
-        
-        }
+        public static int CurrentPoints { get; private set; }
 
-        public int CurrentPoints { get; private set; }
-
-        public void AddPoints()
+        public static void Add()
         {
             CurrentPoints += 10;
         }
