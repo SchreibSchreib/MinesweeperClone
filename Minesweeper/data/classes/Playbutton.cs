@@ -118,6 +118,7 @@ namespace Minesweeper.data.classes
                 MessageBox.Show("Keine Mine!\n" + Spielbrett.lifes + " Leben übrig!");
             }
         }
+
         private void CheckZeros(Playbutton actualButton, Dictionary<string, Playbutton> mineField)
         {
             if (actualButton.nearbyMines > 0)

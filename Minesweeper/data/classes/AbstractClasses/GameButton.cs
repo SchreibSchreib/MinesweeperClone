@@ -6,7 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace Minesweeper.data.classes
+namespace Minesweeper.data.classes.AbstractClasses
 {
     public abstract class GameButton : Button
     {
@@ -14,8 +14,9 @@ namespace Minesweeper.data.classes
         {
             Coordinates = coordOfButton;
             IsClicked = false;
-            MinesAround = new MineCounter(coordOfButton.AsString, currentGameField).Count;
-            Behaviour = currentGameField[coordOfButton.AsString];
+            MinesAround = new MineCounter(Coordinates.AsString, currentGameField).Count;
+            CurrentGameField = currentGameField;
+            Behaviour = currentGameField[Coordinates.AsString];
             Foreground = GetSolidColorBrushOfNumber();
             Background = GetSolidColorBrushOfBackGround();
             ColorOfButton = GetColorOfButton();
@@ -25,13 +26,13 @@ namespace Minesweeper.data.classes
             MouseLeave += PlayButton_MouseLeave;
         }
 
-
-
-        protected Coordinates Coordinates;
-        protected Color ColorOfButton;
-        protected int MinesAround;
-        protected bool Behaviour;
         public bool IsClicked { protected get; set; }
+        public int MinesAround { get; protected set; }
+        public Coordinates Coordinates { get; protected set; }
+
+        protected Dictionary<string, bool> CurrentGameField;
+        protected Color ColorOfButton;
+        protected bool Behaviour;
         protected ColorAnimation FadingColor;
 
         protected SolidColorBrush? GetSolidColorBrushOfNumber()
@@ -52,6 +53,7 @@ namespace Minesweeper.data.classes
                     return null;
             }
         }
+
         protected SolidColorBrush GetSolidColorBrushOfBackGround()
         {
             if (!IsClicked)
@@ -60,6 +62,7 @@ namespace Minesweeper.data.classes
             }
             return new SolidColorBrush(Colors.LightSlateGray);
         }
+
         protected Color GetColorOfButton()
         {
             if (!IsClicked)
@@ -68,6 +71,7 @@ namespace Minesweeper.data.classes
             }
             return Colors.LightSlateGray;
         }
+
         protected ColorAnimation GetColorAnimation()
         {
             if (!IsClicked)
@@ -77,22 +81,24 @@ namespace Minesweeper.data.classes
             return new ColorAnimation(Color.FromRgb(100, 100, 100), ColorOfButton, new Duration(new TimeSpan(5000000)));
         }
 
-        protected void GameButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (!IsClicked)
-            {
-                ClickHandler thisButton = new ClickHandler(this, Field.FirstClickOfGame);
-            }
-        }
-
+        protected abstract void GameButton_Click(object sender, RoutedEventArgs e);
 
         protected void PlayButton_MouseLeave(object sender, MouseEventArgs e)
         {
             Background.BeginAnimation(SolidColorBrush.ColorProperty, FadingColor);
         }
 
+        protected void ShowContent()
+        {
+            if (!IsClicked)
+            {
+                Content = MinesAround.ToString();
+            }
+        }
+
         public void UpDateButtonInformation()
         {
+            ShowContent();
             Background = GetSolidColorBrushOfBackGround();
             ColorOfButton = GetColorOfButton();
             FadingColor = GetColorAnimation();

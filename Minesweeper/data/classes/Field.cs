@@ -1,4 +1,4 @@
-﻿using Minesweeper.data.classes;
+﻿using Minesweeper.data.classes.AbstractClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +11,20 @@ namespace Minesweeper.data.classes
         {
             PlayGround = new FieldGenerator(lengthX, lengthY).PlayGround;
             PlayGround = LogicCheckup.Check(PlayGround);
+            _buttons = new ButtonCreator(PlayGround).GameButtons;
         }
-        public List<GameButton> Buttons { get; private set; }
-        public Dictionary<string, bool> PlayGround { get; private set; }
 
+
+        public Dictionary<string, bool> PlayGround { get; private set; }
         public static bool FirstClickOfGame = true;
 
-        private List<GameButton> CreateButtons()
+        private static List<GameButton> _buttons = new List<GameButton>();
+
+        public static List<GameButton> Buttons
         {
-            List<GameButton> buttons = new List<GameButton>();
-            foreach (KeyValuePair<string, bool> kvp in PlayGround)
-            {
-                int xCoords = int.Parse(kvp.Key.Split(' ')[0]);
-                int yCoords = int.Parse(kvp.Key.Split(' ')[1]);
-                //more Logic for Buttons who inherit from abstract class GameButton
-            }
-            return buttons;
+            get { return _buttons; }
+            private set { _buttons = value; }
+
         }
     }
 }

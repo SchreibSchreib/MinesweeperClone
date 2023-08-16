@@ -1,13 +1,14 @@
 ﻿using System.Windows.Threading;
 
-namespace Minesweeper.data.classes
+namespace Minesweeper.data.classes.AbstractClasses
 {
-    public class ClickHandler
+    public abstract class ClickHandler
     {
         public ClickHandler(GameButton clickedButton, bool isFirstClick)
         {
             _isFirstClick = isFirstClick;
             _clickedButton = clickedButton;
+            clickedButton.IsClicked = true;
 
             if (isFirstClick)
             {
