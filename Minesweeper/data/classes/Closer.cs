@@ -1,20 +1,33 @@
 ﻿using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Minesweeper
 {
     public static class Closer
     {
-        public static void closeWindow(Window currentWindow)
+        public static void closeWindow(Button currentButton)
         {
-            Assembly currentassembly = Assembly.GetExecutingAssembly();
-            foreach (Window window in Application.Current.Windows)
+            DependencyObject parent = VisualTreeHelper.GetParent(currentButton);
+
+            while (parent != null && !(parent is Window))
             {
-                if (window.GetType().Assembly == currentassembly && window == currentWindow)
-                {
-                    window.Close();
-                }
+                parent = VisualTreeHelper.GetParent(parent);
             }
+
+            if (parent is Window window)
+            {
+                window.Close();
+            }
+            //Assembly currentassembly = Assembly.GetExecutingAssembly();
+            //foreach (Window window in Application.Current.Windows)
+            //{
+            //    if (window.GetType().Assembly == currentassembly && window == currentWindow)
+            //    {
+            //        window.Close();
+            //    }
+            //}
         }
     }
 }
