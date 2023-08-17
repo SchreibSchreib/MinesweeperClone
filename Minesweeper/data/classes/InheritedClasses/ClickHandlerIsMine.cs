@@ -1,5 +1,5 @@
 ﻿using Minesweeper.data.classes.AbstractClasses;
-using System;
+using Minesweeper.data.classes;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +11,7 @@ namespace Minesweeper.data.classes.InheritedClasses
     {
         public ClickHandlerIsMine(GameButton clickedButton, bool isFirstClick) : base(clickedButton, isFirstClick)
         {
-
+            Closer.closeWindow(clickedButton);
         }
     }
 }

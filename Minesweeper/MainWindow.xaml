@@ -9,6 +9,48 @@
         WindowStyle="None"
         Title="MainWindow" Height="720" Width="1280">
     <Window.Resources>
+        <Storyboard x:Key="BackgroundAnimation" RepeatBehavior="Forever">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:10" Value="-581"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:10" Value="-151"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:10" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="-581"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="-581"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:10" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="-151"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:12" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="-581"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="-200"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:12" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="-100"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:16" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="-200"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:16" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="-100"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="-151"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:20" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:20" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="-151"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
         <Style TargetType="Image">
             <Style.Triggers>
                 <EventTrigger RoutedEvent="Window.Loaded">
@@ -41,23 +83,102 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Rectangle Width="1280" Height="720" Grid.RowSpan="3" Grid.ColumnSpan="3">
-            <Rectangle.Fill>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="PaleTurquoise" Offset="0.0"/>
-                    <GradientStop Color="PaleGoldenrod" Offset="0.3"/>
-                    <GradientStop Color="LightGreen" Offset="0.7"/>
-                    <GradientStop Color="Aqua" Offset="1.0"/>
-                </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-        <TextBox Name="TextBox_X_Direction" Grid.Row="2" GotFocus="TextBox_X_Direction_GotFocus" LostFocus="TextBox_X_Direction_LostFocus" Text="Felder X" PreviewTextInput="NumberValidation" Foreground="Red" Opacity="0.5" TextAlignment="Center" FontSize="36" FontWeight="Bold" Margin="293,10,706,169"/>
-        <TextBox Name="TextBox_Y_Direction" Grid.Row="2" GotFocus="TextBox_X_Direction_GotFocus" LostFocus="TextBox_X_Direction_LostFocus" Text="Felder Y" PreviewTextInput="NumberValidation" Foreground="Red" Opacity="0.5" TextAlignment="Center" FontSize="36" FontWeight="Bold" Margin="710,10,289,169"/>
-        <TextBlock Name="header" HorizontalAlignment="Center" TextAlignment="Center" FontSize="100" VerticalAlignment="Top" Height="279" Width="796" FontFamily="/data/Font/#Black Asylum" Text="MineSweeper&#xD;&#xA;By Schreib_Schreib" FontWeight="Bold" Margin="0,10,0,0">
+        <Canvas>
+        <Border Width="1861" Height="871" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="3">
+            <Border.Background>
+                <ImageBrush ImageSource="data/graphics/MineSweeperBackground.png"/>
+            </Border.Background>
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform X="0" Y="0"/>
+                </TransformGroup>
+            </Border.RenderTransform>
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard Storyboard="{StaticResource BackgroundAnimation}"/>
+                </EventTrigger>
+            </Border.Triggers>
+        </Border>
+        </Canvas>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="209*"/>
+                <ColumnDefinition Width="287*"/>
+                <ColumnDefinition Width="287*"/>
+                <ColumnDefinition Width="287*"/>
+                <ColumnDefinition Width="210*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="26*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="15*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="startButton" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Margin="60,5,60,5" Background="#FF9ECFF5" BorderBrush="#99000000" Content="Start"  FontSize="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="DemiBold">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="leaderBoardButton" Click="leaderBoardButton_Click" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Margin="60,5,60,5" Background="#FF9ECFF5" BorderBrush="#99000000" UseLayoutRounding="False" Content="LeaderBoard" FontSize="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="DemiBold">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="43*"/>
+                    <RowDefinition Height="61*"/>
+                </Grid.RowDefinitions>
+                <CheckBox x:Name="easy" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="0">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    </CheckBox.LayoutTransform>
+                    <CheckBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </CheckBox.Resources>
+                </CheckBox>
+                <CheckBox x:Name="normal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    </CheckBox.LayoutTransform>
+                    <CheckBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </CheckBox.Resources>
+                </CheckBox>
+                <CheckBox x:Name="hard" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    </CheckBox.LayoutTransform>
+                    <CheckBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </CheckBox.Resources>
+                </CheckBox>
+                <TextBlock Text="Easy" FontFamily="/data/Font/#Angular" Grid.Column="0" Grid.Row="2" Foreground="#FF43EF94" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60" FontWeight="Bold" />
+                <TextBlock Text="Medium" FontFamily="/data/Font/#Angular" Grid.Column="1" Grid.Row="2" Foreground="#FFF1DB43" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60" FontWeight="Bold" />
+                <TextBlock Text="Hard" FontFamily="/data/Font/#Angular" Grid.Column="2" Grid.Row="2" Foreground="#FFF1453D" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60" FontWeight="Bold" />
+
+            </Grid>
+        </Grid>
+        <TextBlock Name="header" HorizontalAlignment="Center" TextAlignment="Center" FontSize="105" VerticalAlignment="Top" Height="279" Width="1088" FontFamily="/data/Font/#Angular" FontWeight="Bold" Margin="0,10,0,0" Grid.RowSpan="2">
             <TextBlock.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFEE1DEF"/>
-                    <GradientStop Color="#FF7D0B0B" Offset="1"/>
+                    <GradientStop Color="#FF100B07" Offset="0"/>
+                    <GradientStop Color="#FFC14C4C" Offset="1"/>
                 </LinearGradientBrush>
             </TextBlock.Foreground>
             <TextBlock.Triggers>
@@ -70,21 +191,9 @@
                     </BeginStoryboard>
                 </EventTrigger>
             </TextBlock.Triggers>
+            MineSweeper <LineBreak/>
+            By Schreib_Schreib
         </TextBlock>
-        <Button x:Name="startButton" Click="startButton_Click" Background="#66DE1818" Grid.Row="2" OpacityMask="#9B865959" BorderBrush="#99000000" Margin="430,85,430,96" Content="Start" FontSize="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="DemiBold">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="20"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Button x:Name="leaderBoardButton" Click="leaderBoardButton_Click" Background="#66DE1818" Grid.Row="2" OpacityMask="#9B865959" BorderBrush="#99000000" UseLayoutRounding="False" Margin="430,161,430,20" Content="LeaderBoard" FontSize="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="DemiBold">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="20"/>
-                </Style>
-            </Button.Resources>
-        </Button>
         <Canvas Margin="-211,13,1280,13" Grid.Row="1" x:Name="movingCanvas" >
             <Canvas.RenderTransform>
                 <TranslateTransform/>
