@@ -86,7 +86,6 @@ namespace Minesweeper.data.classes
             if (btn?.behaviour == true) //Mine
             {
 #pragma warning disable CS8604 // Mögliches Nullverweisargument.
-                Closer.closeWindow(currentSession);
 #pragma warning restore CS8604 // Mögliches Nullverweisargument.
             }
             else //keine Mine
