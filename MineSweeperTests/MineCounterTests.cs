@@ -13,7 +13,7 @@ public class MineCounterTests
     public void MineCounter_Initialization_ShouldSetPropertysCorrectly(string currentButton, int xAxis = 10, int yAxis = 10)
     {
         //Arrange
-        Dictionary<string, bool> gameField = new Field(xAxis, yAxis).PlayGround;
+        Dictionary<string, bool> gameField = new FieldGenerator(xAxis, yAxis).PlayGround;
         List<bool> foundMines = new List<bool>();
         MineCounter mineCounter = new MineCounter(currentButton, gameField);
 
