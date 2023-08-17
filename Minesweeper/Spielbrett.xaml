@@ -48,7 +48,7 @@
             <Border BorderThickness="5" BorderBrush="LightGray">
             </Border>
         </Grid>
-        <Grid x:Name="SpawnGrid" Loaded="SpawnGrid_Loaded" Grid.Row="1" Margin="5" Background="DarkGray">
+        <Grid x:Name="SpawnGrid" Grid.Row="1" Margin="5" Background="DarkGray">
 
         </Grid>
     </Grid>

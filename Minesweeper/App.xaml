@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:Minesweeper"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <FontFamily x:Key="CustomFont">/Minesweeper;/data/Font/#Angular</FontFamily>
+        <FontFamily x:Key="Asylum">/Minesweeper;/data/Font/#BlackAsylum</FontFamily>
     </Application.Resources>
 </Application>
 

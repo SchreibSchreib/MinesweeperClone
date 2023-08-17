@@ -32,6 +32,7 @@ namespace Minesweeper
             _xMaxLength = _gridLengthCalculator.CalculateX();
             _yMaxLength = _gridLengthCalculator.CalculateY();
             _gridForMines = GetGameGrid();
+            LoadButtonsToGrid();
             InitializeComponent();
         }
 
@@ -44,21 +45,17 @@ namespace Minesweeper
 
         private Grid GetGameGrid() => new GridCreator(_xMaxLength, _yMaxLength).CurrentGrid;
 
+        private void LoadButtonsToGrid()
+        {
+            foreach (GameButton button in _buttonsList)
+            {
+                _gridForMines.Children.Add(button);
+                Grid.SetRow(button, int.Parse(button.Coordinates.AsString.Split(" ")[0]));
+                Grid.SetColumn(button, int.Parse(button.Coordinates.AsString.Split(" ")[1]));
+            }
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

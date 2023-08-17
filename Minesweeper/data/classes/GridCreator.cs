@@ -17,6 +17,7 @@ namespace Minesweeper.data.classes
         }
 
         public Grid CurrentGrid { get; private set; }
+
         private int _columns;
         private int _rows;
 
