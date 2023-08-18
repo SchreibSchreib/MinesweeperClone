@@ -9,6 +9,10 @@ namespace Minesweeper.data.classes
 {
     public class Difficulty
     {
+        public Difficulty() 
+        {
+            GetDifficulty = "medium";
+        }
         public Difficulty(CheckBox difficultyCheckBox)
         {
             GetDifficulty = difficultyCheckBox.Name;

@@ -15,12 +15,14 @@ namespace Minesweeper.data.classes.InheritedClasses
             : base(coordOfButton, currentGameField)
         {
             Background = new SolidColorBrush(Colors.Red);
+            Content = null;
         }
 
         protected override void GameButton_Click(object sender, RoutedEventArgs e)
         {
             if (!IsClicked)
             {
+                MessageBox.Show(this.Coordinates.AsString);
                 ClickHandler clickHandler = new ClickHandlerIsMine(this, Field.FirstClickOfGame);
                 clickHandler.Handle();
             }

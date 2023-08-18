@@ -8,9 +8,9 @@ namespace Minesweeper.data.classes
 {
     public class PointEvaluater
     {
-        public PointEvaluater(string difficulty)
+        public PointEvaluater(Difficulty currentDifficulty)
         {
-            _stringDifficulty = difficulty;
+            _stringDifficulty = currentDifficulty.GetDifficulty;
         }
 
         private string _stringDifficulty;

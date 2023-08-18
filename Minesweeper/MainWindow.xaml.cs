@@ -19,19 +19,16 @@ using Minesweeper.data.classes;
 
 namespace Minesweeper
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
-            _difficulty = "medium";
+            _difficulty = new Difficulty();
             _pointEvaluator = new PointEvaluater(_difficulty);
             InitializeComponent();
         }
 
-        private string _difficulty;
+        private Difficulty _difficulty;
         private PointEvaluater _pointEvaluator;
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
@@ -48,7 +45,7 @@ namespace Minesweeper
 
         private void SetDifficulty(CheckBox checkBox)
         {
-            _difficulty = new Difficulty(checkBox).GetDifficulty;
+            _difficulty = new Difficulty(checkBox);
         }
 
         private void UncheckOtherCheckBoxes(CheckBox checkBox)
@@ -72,31 +69,14 @@ namespace Minesweeper
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            Field currentField = new Field(10, 10);
+            Field currentField = new Field(20, 20);
+            CompleteGameBoardWindow newGame = new CompleteGameBoardWindow(currentField, _pointEvaluator, _difficulty);
+            newGame.Show();
         }
 
         private void leaderBoardButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
-
-        //        private void startButton_Click(object sender, RoutedEventArgs e)
-        //        {
-        //            Field.FirstClickOfGame = true;
-        //            Field startField = new Field(Convert.ToInt32(TextBox_X_Direction.Text),Convert.ToInt32(TextBox_Y_Direction.Text));
-        //            Dictionary<string,Playbutton> loadDictionary = new Dictionary<string,Playbutton>();
-        //            List<Playbutton> playButtons= new List<Playbutton>();
-        //            foreach (KeyValuePair<string,bool> fieldKey in startField.PlayGround)
-        //            {
-        //                Playbutton loader = new Playbutton(fieldKey);
-        //                playButtons.Add(loader);
-        //                loadDictionary.Add(loader.coordinates, loader);
-        //            }
-        //            Playbutton.currentSessionButtons = loadDictionary;
-        //            Spielbrett newSession = new Spielbrett(playButtons, Convert.ToInt32(TextBox_X_Direction.Text), Convert.ToInt32(TextBox_Y_Direction.Text));
-        //            Playbutton.currentSession = newSession;
-        //            newSession.Show();
-        //        }
     }
 }

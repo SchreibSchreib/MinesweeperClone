@@ -9,30 +9,29 @@ namespace Minesweeper.data.classes
 {
     internal class GridCreator
     {
-        public GridCreator(int maxXCoords, int maxYCoords)
+        public GridCreator(int maxXCoords, int maxYCoords, Grid actualGrid)
         {
             _columns = maxXCoords;
             _rows = maxYCoords;
-            CurrentGrid = DefineSpawnGrid();
+            ActualGrid = actualGrid;
+            DefineSpawnGrid();
         }
 
-        public Grid CurrentGrid { get; private set; }
+        public Grid ActualGrid { get; private set; }
 
         private int _columns;
         private int _rows;
 
-        public Grid DefineSpawnGrid()
+        private void DefineSpawnGrid()
         {
-            Grid newGrid = new Grid();
-            for (int row = 0; row < _rows; row++)
+            for (int row = 0; row <= _rows; row++)
             {
-                newGrid.RowDefinitions.Add(new RowDefinition());
+                ActualGrid.RowDefinitions.Add(new RowDefinition());
             }
-            for (int column = 0; column < _columns; column++)
+            for (int column = 0; column <= _columns; column++)
             {
-                newGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                ActualGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
-            return newGrid;
         }
     }
 }

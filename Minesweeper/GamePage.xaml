@@ -1,12 +1,13 @@
-﻿<Window x:Class="Minesweeper.GameBoard"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Minesweeper"
-        mc:Ignorable="d"
-        SizeToContent="WidthAndHeight"
-        Title="Spielbrett" Height="290" Width="200">
+﻿<Page x:Class="Minesweeper.GamePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Minesweeper"
+      mc:Ignorable="d" 
+      d:DesignHeight="290" d:DesignWidth="200"
+      Title="GamePage">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -52,4 +53,4 @@
 
         </Grid>
     </Grid>
-</Window>
+</Page>
