@@ -70,9 +70,9 @@ namespace Minesweeper
             }
         }
 
-        private void startButton_Click(object sender, RoutedEventArgs e)
+        private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Field currentField = new Field(10, 10);
         }
 
         private void leaderBoardButton_Click(object sender, RoutedEventArgs e)
