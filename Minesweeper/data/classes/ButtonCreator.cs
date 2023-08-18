@@ -49,7 +49,7 @@ namespace Minesweeper.data.classes
             int xCoords = int.Parse(kvp.Key.Split(' ')[0]);
             int yCoords = int.Parse(kvp.Key.Split(' ')[1]);
             Coordinates newButtonCoords = new Coordinates(xCoords, yCoords);
-            GameButtons.Add(new ButtonIsMine(newButtonCoords, _currentGameField));
+            GameButtons.Add(new ButtonIsMine(newButtonCoords, _currentGameField, _fieldInformation));
         }
     }
 }
