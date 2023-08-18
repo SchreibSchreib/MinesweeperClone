@@ -83,6 +83,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Frame x:Name="FrameForLeaderBoard"/>
         <Canvas>
             <Border Width="1861" Height="871" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="3">
                 <Border.Background>

@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Minesweeper.data.classes;
+using Minesweeper.Xaml.Sites;
 
 namespace Minesweeper
 {
@@ -78,7 +79,8 @@ namespace Minesweeper
 
         private void leaderBoardButton_Click(object sender, RoutedEventArgs e)
         {
-
+            LeaderBoard leaderBoard = new LeaderBoard();
+            FrameForLeaderBoard.Navigate(leaderBoard);
         }
     }
 }

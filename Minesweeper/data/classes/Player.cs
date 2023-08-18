@@ -13,18 +13,13 @@ namespace Minesweeper.data.classes
 
             Name = name;
             Points = pointsForThisPlayer;
-            _currentDifficulty = currentDifficulty;
+            CurrentDifficulty = currentDifficulty;
         }
 
-        private Difficulty _currentDifficulty;
-
+        public Difficulty CurrentDifficulty { get; private set; }
         public string Name { get; private set; }
         public Points Points { get; private set; }
-        public int GetCalculatedPoints { get; private set; }
 
-        public void CalculateHisPoints()
-        {
-            GetCalculatedPoints = PointEvaluator.Evaluate(_currentDifficulty.Get, Points.Current);
-        }
+        public int CalculateHisPoints() => PointEvaluator.Evaluate(CurrentDifficulty.Get, Points.Current);
     }
 }
