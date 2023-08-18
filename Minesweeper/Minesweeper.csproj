@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Include="App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="data\Font\Angular.ttf" />
     <Resource Include="data\Font\BlackAsylum.ttf" />
     <Resource Include="data\graphics\Mine.png" />
@@ -31,6 +35,10 @@
     <Resource Include="data\graphics\ScaredFace.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="data\Scores\" />
   </ItemGroup>
 
 </Project>

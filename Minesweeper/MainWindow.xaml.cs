@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,103 +19,66 @@ using Minesweeper.data.classes;
 
 namespace Minesweeper
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
+            _difficulty = new Difficulty();
             InitializeComponent();
+        }
+
+        private Difficulty _difficulty;
+
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            var checkBox = sender as CheckBox;
+            if (checkBox == null)
+            {
+                return;
+            }
+
+            SetDifficulty(checkBox);
+            UncheckOtherCheckBoxes(checkBox);
+        }
+
+        private void SetDifficulty(CheckBox checkBox)
+        {
+            _difficulty = new Difficulty(checkBox);
+        }
+
+        private void UncheckOtherCheckBoxes(CheckBox checkBox)
+        {
+            Panel? parentPanel = PanelFinder.GetParentPanel(checkBox);
+            if (parentPanel == null)
+            {
+                Debug.WriteLine("No Panel as Parent found.");
+                return;
+            }
+            List<CheckBox> checkBoxes = ObjectFinder.GetCheckBoxes(parentPanel);
+            foreach (CheckBox box in checkBoxes)
+            {
+                Debug.WriteLine($"{box.Name} found.  Value: {box.IsChecked}");
+                if (box != checkBox)
+                {
+                    box.IsChecked = false;
+                }
+            }
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            string name = NameOfPlayer.Text;
+            Points newPoints = new Points();
+            Player newPlayer = new Player(name,newPoints,_difficulty);
+            WholeSessionData currentField = new WholeSessionData(20, 20, newPlayer);
+            CompleteGameBoardWindow newGame = new CompleteGameBoardWindow(currentField);
+            newGame.Show();
+            this.Close();
         }
 
         private void leaderBoardButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //        private void TextBox_X_Direction_GotFocus(object sender, RoutedEventArgs e)
-        //        {
-        //            TextBox? boxClicked = sender as TextBox;
-        //            if (boxClicked?.Name == "TextBox_Y_Direction")
-        //            {
-        //                if (boxClicked.Text == "Felder Y")
-        //                {
-        //                    boxClicked.Text = null;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                if (boxClicked?.Text == "Felder X")
-        //                {
-        //                    boxClicked.Text = null;
-        //                }
-        //            }
-        //        }
-
-        //        private void TextBox_X_Direction_LostFocus(object sender, RoutedEventArgs e)
-        //        {
-        //            TextBox? boxLostFocus = sender as TextBox;
-        //#pragma warning disable CS8602 // Dereferenzierung eines möglichen Nullverweises.
-        //            if (boxLostFocus.Text.Contains(" ") || boxLostFocus.Text.Length == 0 || boxLostFocus.Text == null || Convert.ToInt32(boxLostFocus.Text) < 10 || Convert.ToInt32(boxLostFocus.Text) > 50)
-        //            {
-        //                if (boxLostFocus.Name == "TextBox_Y_Direction")
-        //                {
-        //                    if ((boxLostFocus.Text.Contains(" ") || boxLostFocus.Text.Length == 0 || boxLostFocus.Text == null || Convert.ToInt32(boxLostFocus.Text) < 10 || Convert.ToInt32(boxLostFocus.Text) > 50 || boxLostFocus.Text.Length == 0 || boxLostFocus.Text == null))
-        //                    { 
-        //                        MessageBox.Show("Aktuell werden nur Zahlen zwischen 10 und 50 supportet."); 
-        //                    }
-        //                    boxLostFocus.Text = "Felder Y";
-        //                }
-        //                else
-        //                {
-        //#pragma warning disable CS8602 // Dereferenzierung eines möglichen Nullverweises.
-        //                    if (boxLostFocus.Text.Contains(' ') || boxLostFocus.Text.Length == 0 || boxLostFocus.Text == null || Convert.ToInt32(boxLostFocus.Text) < 10 || Convert.ToInt32(boxLostFocus.Text) > 50)
-        //                    {
-        //                        MessageBox.Show("Aktuell werden nur Zahlen zwischen 10 und 50 supportet.");
-        //                    }
-        //#pragma warning restore CS8602 // Dereferenzierung eines möglichen Nullverweises.
-        //                    boxLostFocus.Text = "Felder X";
-        //                }
-        //            }
-        //#pragma warning restore CS8602 // Dereferenzierung eines möglichen Nullverweises.
-        //        }
-
-        //        private void NumberValidation(object sender, TextCompositionEventArgs e) 
-        //        {
-        //            Regex checkOnlyNumbers = new Regex("[^0-9]+");
-        //            e.Handled = checkOnlyNumbers.IsMatch(e.Text);
-        //        }
-
-        //        private void startButton_Click(object sender, RoutedEventArgs e)
-        //        {
-        //            Field.FirstClickOfGame = true;
-        //            Field startField = new Field(Convert.ToInt32(TextBox_X_Direction.Text),Convert.ToInt32(TextBox_Y_Direction.Text));
-        //            Dictionary<string,Playbutton> loadDictionary = new Dictionary<string,Playbutton>();
-        //            List<Playbutton> playButtons= new List<Playbutton>();
-        //            foreach (KeyValuePair<string,bool> fieldKey in startField.PlayGround)
-        //            {
-        //                Playbutton loader = new Playbutton(fieldKey);
-        //                playButtons.Add(loader);
-        //                loadDictionary.Add(loader.coordinates, loader);
-        //            }
-        //            Playbutton.currentSessionButtons = loadDictionary;
-        //            Spielbrett newSession = new Spielbrett(playButtons, Convert.ToInt32(TextBox_X_Direction.Text), Convert.ToInt32(TextBox_Y_Direction.Text));
-        //            Playbutton.currentSession = newSession;
-        //            newSession.Show();
-        //        }
     }
 }

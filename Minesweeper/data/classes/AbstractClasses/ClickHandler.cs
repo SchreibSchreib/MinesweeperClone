@@ -4,15 +4,15 @@ namespace Minesweeper.data.classes.AbstractClasses
 {
     public abstract class ClickHandler
     {
-        public ClickHandler(GameButton clickedButton, bool isFirstClick)
+        public ClickHandler(GameButton clickedButton, WholeSessionData currentSession)
         {
-            _isFirstClick = isFirstClick;
+            _isFirstClick = currentSession.FirstClickOfGame;
             _clickedButton = clickedButton;
             clickedButton.IsClicked = true;
 
-            if (isFirstClick)
+            if (_isFirstClick)
             {
-                Field.FirstClickOfGame = false;
+                currentSession.FirstClickOfGame = false;
             }
         }
 

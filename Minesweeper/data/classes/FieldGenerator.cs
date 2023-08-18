@@ -20,11 +20,6 @@ namespace Minesweeper.data.classes
         private int _highestXAxis;
         private int _highestYAxis;
 
-        public Dictionary<string, bool> CheckLogicOfPrototype(Dictionary<string,bool> prototypePlayground)
-        {
-            return LogicCheckup.Check(prototypePlayground);
-        }
-
         private Dictionary<string, bool> CreatePrototypePlayGround()
         {
             var map = new Dictionary<string, bool>();

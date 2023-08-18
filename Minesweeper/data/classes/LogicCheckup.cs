@@ -34,6 +34,6 @@ namespace Minesweeper.data.classes
                 minesAroundButton.Count--;
             }
         }
-        private static int CalculateMaxMines() => 4; // space for more logic (i.e. difficulty)
+        private static int CalculateMaxMines() => 3; // space for more logic (i.e. difficulty)
     }
 }

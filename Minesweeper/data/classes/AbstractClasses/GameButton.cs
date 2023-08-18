@@ -24,6 +24,9 @@ namespace Minesweeper.data.classes.AbstractClasses
             FontWeight = FontWeights.Bold;
             Click += GameButton_Click;
             MouseLeave += PlayButton_MouseLeave;
+            Content = MinesAround;
+            Height = 20;
+            Width = 20;
         }
 
         public bool IsClicked { protected get; set; }
@@ -50,7 +53,7 @@ namespace Minesweeper.data.classes.AbstractClasses
                 case 5:
                     return new SolidColorBrush(Colors.Orange);
                 default:
-                    return null;
+                    return new SolidColorBrush(Colors.Black);
             }
         }
 

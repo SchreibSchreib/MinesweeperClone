@@ -6,22 +6,22 @@ namespace Minesweeper.data.classes
 {
     internal class BroadSearchAlgorithm
     {
-        public BroadSearchAlgorithm(GameButton actualButton, Dictionary<string, bool> mineField, List<GameButton> buttonList)
+        public BroadSearchAlgorithm(GameButton actualButton, Dictionary<string, bool> mineField, List<GameButton> buttonList, WholeSessionData wholeSessionData)
         {
+            _wholeSessionData = wholeSessionData;
             _actualButton = actualButton;
             _mineField = mineField;
             _buttonList = buttonList;
-            CheckForButtonsWithZeroMines();
-            ToggleButtons();
         }
 
+        private WholeSessionData _wholeSessionData;
         private GameButton _actualButton;
         private Dictionary<string, bool> _mineField;
         private List<GameButton> _buttonList;
         private Queue<string> _buttonsToCheck = new Queue<string>();
         private HashSet<string> _connectedButtonNames = new HashSet<string>();
 
-        private void CheckForButtonsWithZeroMines()
+        public void CheckForButtonsWithZeroMines()
         {
             LoadActualButtonToQueue();
 
@@ -75,15 +75,15 @@ namespace Minesweeper.data.classes
             }
         }
 
-        private void ToggleButtons()
+        public void ToggleButtons()
         {
-            foreach(string buttonName in _connectedButtonNames)
+            foreach (string buttonName in _connectedButtonNames)
             {
                 foreach (GameButton gameButton in _buttonList)
                 {
                     if (gameButton.Coordinates.AsString == buttonName)
                     {
-                        ClickHandler clickHandler = new ClickHandlerNoMine(gameButton, Field.FirstClickOfGame);
+                        ClickHandler clickHandler = new ClickHandlerNoMine(gameButton, _wholeSessionData);
                         clickHandler.Handle();
                     }
                 }
