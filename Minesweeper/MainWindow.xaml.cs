@@ -24,12 +24,10 @@ namespace Minesweeper
         public MainWindow()
         {
             _difficulty = new Difficulty();
-            _pointEvaluator = new PointEvaluater(_difficulty);
             InitializeComponent();
         }
 
         private Difficulty _difficulty;
-        private PointEvaluater _pointEvaluator;
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
@@ -69,9 +67,13 @@ namespace Minesweeper
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            Field currentField = new Field(20, 20);
-            CompleteGameBoardWindow newGame = new CompleteGameBoardWindow(currentField, _pointEvaluator, _difficulty);
+            string name = NameOfPlayer.Text;
+            Points newPoints = new Points();
+            Player newPlayer = new Player(name,newPoints,_difficulty);
+            WholeSessionData currentField = new WholeSessionData(20, 20, newPlayer);
+            CompleteGameBoardWindow newGame = new CompleteGameBoardWindow(currentField);
             newGame.Show();
+            this.Close();
         }
 
         private void leaderBoardButton_Click(object sender, RoutedEventArgs e)

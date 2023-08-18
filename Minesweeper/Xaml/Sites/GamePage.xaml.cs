@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Minesweeper.data.classes.AbstractClasses;
+using Minesweeper.data.classes;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,22 +12,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
-using Minesweeper.data.classes;
-using Minesweeper.data.classes.AbstractClasses;
 
 namespace Minesweeper
 {
     /// <summary>
-    /// Interaktionslogik für Spielbrett.xaml
+    /// Interaktionslogik für GamePage.xaml
     /// </summary>
-    public partial class GameBoard : Window
+    public partial class GamePage : Page
     {
-        public GameBoard(Field currentGameField, PointEvaluater pointEvaluaterThisSession, Difficulty difficultyThisSession)
+        public GamePage(WholeSessionData currentGameField)
         {
             InitializeComponent();
-            _currentGameField = currentGameField;
+            //_currentGameField = currentGameField;  ???
             _buttonsList = currentGameField.Buttons;
             _gridLengthCalculator = new GridLengthCalculator(_buttonsList);
             _xMaxLength = _gridLengthCalculator.CalculateX();
@@ -36,7 +34,7 @@ namespace Minesweeper
             LoadButtonsToGrid();
         }
 
-        private Field _currentGameField;
+        //private Field _currentGameField; ???
         private List<GameButton> _buttonsList;
         private GridLengthCalculator _gridLengthCalculator;
         private int _xMaxLength;

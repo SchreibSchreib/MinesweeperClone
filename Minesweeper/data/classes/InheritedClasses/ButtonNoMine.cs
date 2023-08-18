@@ -6,19 +6,21 @@ namespace Minesweeper.data.classes.InheritedClasses
 {
     internal class ButtonNoMine : GameButton
     {
-        public ButtonNoMine(Coordinates coordOfButton, Dictionary<string, bool> currentGameField, Field fieldInformation)
+        public ButtonNoMine(Coordinates coordOfButton, Dictionary<string, bool> currentGameField, WholeSessionData fieldInformation)
             : base(coordOfButton, currentGameField)
         {
             FieldInformation = fieldInformation;
         }
 
-        protected Field FieldInformation;
+        protected WholeSessionData FieldInformation;
 
         protected override void GameButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(this.Coordinates.AsString);
-            ClickHandler thisButton = new ClickHandlerNoMine(this, Field.FirstClickOfGame);
-            BroadSearchAlgorithm broadSearchThisClick = new BroadSearchAlgorithm(this, CurrentGameField, FieldInformation.Buttons);
+            ClickHandler thisButton = new ClickHandlerNoMine(this, WholeSessionData.FirstClickOfGame, FieldInformation);
+            BroadSearchAlgorithm broadSearchThisClick = new BroadSearchAlgorithm(this, CurrentGameField, FieldInformation.Buttons, FieldInformation);
+            broadSearchThisClick.CheckForButtonsWithZeroMines();
+            broadSearchThisClick.ToggleButtons();
             thisButton.Handle();
         }
     }

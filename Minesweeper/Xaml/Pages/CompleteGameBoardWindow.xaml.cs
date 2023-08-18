@@ -20,10 +20,10 @@ namespace Minesweeper
     /// </summary>
     public partial class CompleteGameBoardWindow : Window
     {
-        public CompleteGameBoardWindow(Field currentGameField, PointEvaluater pointEvaluaterThisSession, Difficulty difficultyThisSession)
+        public CompleteGameBoardWindow(WholeSessionData currentGameField)
         {
             InitializeComponent();
-            GamePage newSession = new GamePage(currentGameField, pointEvaluaterThisSession, difficultyThisSession);
+            GamePage newSession = new GamePage(currentGameField);
             ContentFrame.Navigate(newSession);
         }
     }

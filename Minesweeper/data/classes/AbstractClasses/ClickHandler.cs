@@ -12,7 +12,7 @@ namespace Minesweeper.data.classes.AbstractClasses
 
             if (isFirstClick)
             {
-                Field.FirstClickOfGame = false;
+                WholeSessionData.FirstClickOfGame = false;
             }
         }
 

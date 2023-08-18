@@ -5,10 +5,11 @@ using System.Linq;
 
 namespace Minesweeper.data.classes
 {
-    public class Field
+    public class WholeSessionData
     {
-        public Field(int lengthX, int lengthY)
+        public WholeSessionData(int lengthX, int lengthY, Player currentPlayer)
         {
+            CurrentPlayer = currentPlayer;
             PlayGround = new FieldGenerator(lengthX, lengthY).PlayGround;
             PlayGround = LogicCheckup.Check(PlayGround);
             Buttons = new ButtonCreator(PlayGround, this).GameButtons;
@@ -18,5 +19,6 @@ namespace Minesweeper.data.classes
         public Dictionary<string, bool> PlayGround { get; private set; }
         public static bool FirstClickOfGame = true;
         public List<GameButton> Buttons { get; private set; }
+        public Player CurrentPlayer { get; private set; }
     }
 }

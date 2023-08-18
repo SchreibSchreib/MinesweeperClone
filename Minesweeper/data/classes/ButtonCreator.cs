@@ -10,7 +10,7 @@ namespace Minesweeper.data.classes
 {
     internal class ButtonCreator
     {
-        public ButtonCreator(Dictionary<string, bool> currentGameField, Field fieldInformation)
+        public ButtonCreator(Dictionary<string, bool> currentGameField, WholeSessionData fieldInformation)
         {
             _currentGameField = currentGameField;
             _fieldInformation = fieldInformation;
@@ -20,7 +20,7 @@ namespace Minesweeper.data.classes
         public List<GameButton> GameButtons = new List<GameButton>();
 
         private Dictionary<string, bool> _currentGameField;
-        private Field _fieldInformation;
+        private WholeSessionData _fieldInformation;
 
         private void CreateMineButtons()
         {

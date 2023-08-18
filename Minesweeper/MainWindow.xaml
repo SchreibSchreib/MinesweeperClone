@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
         AllowsTransparency="False"
-        WindowStyle="SingleBorderWindow"
+        WindowStyle="None"
         Title="MainWindow" Height="720" Width="1280">
     <Window.Resources>
         <Storyboard x:Key="BackgroundAnimation" RepeatBehavior="Forever">
@@ -83,17 +83,16 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
         <Canvas>
-        <Border Width="1861" Height="871" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="3">
-            <Border.Background>
-                <ImageBrush ImageSource="data/graphics/MineSweeperBackground.png" Stretch="UniformToFill"/>
-            </Border.Background>
-            <Border.RenderTransform>
-                <TransformGroup>
-                    <TranslateTransform X="0" Y="0"/>
-                </TransformGroup>
-            </Border.RenderTransform>
+            <Border Width="1861" Height="871" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="3">
+                <Border.Background>
+                    <ImageBrush ImageSource="data/graphics/MineSweeperBackground.png" Stretch="UniformToFill"/>
+                </Border.Background>
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="0" Y="0"/>
+                    </TransformGroup>
+                </Border.RenderTransform>
                 <Border.Triggers>
                     <EventTrigger RoutedEvent="Loaded">
                         <BeginStoryboard Storyboard="{StaticResource BackgroundAnimation}"/>
@@ -207,5 +206,26 @@
                 </Image.RenderTransform>
             </Image>
         </Canvas>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="NameOfPlayer" Grid.Row="1" Grid.Column="1" Margin="20,40,20,0"/>
+            <TextBlock Text="Your Name" FontFamily="/data/Font/#Angular" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="80" FontWeight="Bold" >
+                <TextBlock.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF100B07"/>
+                        <GradientStop Color="#FFC14C4C" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBlock.Foreground>
+            </TextBlock>
+        </Grid>
     </Grid>
 </Window>

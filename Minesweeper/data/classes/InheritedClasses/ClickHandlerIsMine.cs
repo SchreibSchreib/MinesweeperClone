@@ -11,6 +11,9 @@ namespace Minesweeper.data.classes.InheritedClasses
     {
         public ClickHandlerIsMine(GameButton clickedButton, bool isFirstClick) : base(clickedButton, isFirstClick)
         {
+            WholeSessionData.FirstClickOfGame = true;
+            MainWindow backToMain = new MainWindow();
+            backToMain.Show();
             Closer.closeWindow(clickedButton);
         }
     }

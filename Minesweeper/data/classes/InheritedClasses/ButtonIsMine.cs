@@ -23,7 +23,7 @@ namespace Minesweeper.data.classes.InheritedClasses
             if (!IsClicked)
             {
                 MessageBox.Show(this.Coordinates.AsString);
-                ClickHandler clickHandler = new ClickHandlerIsMine(this, Field.FirstClickOfGame);
+                ClickHandler clickHandler = new ClickHandlerIsMine(this, WholeSessionData.FirstClickOfGame);
                 clickHandler.Handle();
             }
         }

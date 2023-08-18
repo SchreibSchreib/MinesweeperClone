@@ -11,14 +11,14 @@ namespace Minesweeper.data.classes
     {
         public Difficulty() 
         {
-            GetDifficulty = "medium";
+            Get = "medium";
         }
         public Difficulty(CheckBox difficultyCheckBox)
         {
-            GetDifficulty = difficultyCheckBox.Name;
+            Get = difficultyCheckBox.Name;
         }
 
-        public string GetDifficulty { get; private set; }
+        public string Get { get; private set; }
 
         public enum Rank { easy = 1, medium, hard }
     }
