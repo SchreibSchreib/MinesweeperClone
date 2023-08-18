@@ -77,13 +77,13 @@ namespace Minesweeper.data.classes
 
         public void ToggleButtons()
         {
-            foreach(string buttonName in _connectedButtonNames)
+            foreach (string buttonName in _connectedButtonNames)
             {
                 foreach (GameButton gameButton in _buttonList)
                 {
                     if (gameButton.Coordinates.AsString == buttonName)
                     {
-                        ClickHandler clickHandler = new ClickHandlerNoMine(gameButton, WholeSessionData.FirstClickOfGame, _wholeSessionData);
+                        ClickHandler clickHandler = new ClickHandlerNoMine(gameButton, _wholeSessionData);
                         clickHandler.Handle();
                     }
                 }

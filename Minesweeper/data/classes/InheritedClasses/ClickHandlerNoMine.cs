@@ -5,7 +5,7 @@ namespace Minesweeper.data.classes.InheritedClasses
 {
     internal class ClickHandlerNoMine : ClickHandler
     {
-        public ClickHandlerNoMine(GameButton clickedButton, bool isFirstClick, WholeSessionData currentSession) : base (clickedButton, isFirstClick)
+        public ClickHandlerNoMine(GameButton clickedButton, WholeSessionData currentSession) : base (clickedButton, currentSession)
         {
             currentSession.CurrentPlayer.Points.Add();
         }

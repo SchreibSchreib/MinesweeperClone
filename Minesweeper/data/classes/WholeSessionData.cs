@@ -17,7 +17,7 @@ namespace Minesweeper.data.classes
 
 
         public Dictionary<string, bool> PlayGround { get; private set; }
-        public static bool FirstClickOfGame = true;
+        public bool FirstClickOfGame = true;
         public List<GameButton> Buttons { get; private set; }
         public Player CurrentPlayer { get; private set; }
     }

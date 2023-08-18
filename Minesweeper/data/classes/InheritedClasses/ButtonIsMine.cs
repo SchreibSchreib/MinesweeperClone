@@ -11,19 +11,22 @@ namespace Minesweeper.data.classes.InheritedClasses
 {
     internal class ButtonIsMine : GameButton
     {
-        public ButtonIsMine(Coordinates coordOfButton, Dictionary<string, bool> currentGameField)
+        public ButtonIsMine(Coordinates coordOfButton, Dictionary<string, bool> currentGameField, WholeSessionData fieldInformation)
             : base(coordOfButton, currentGameField)
         {
+            FieldInformation = fieldInformation;
             Background = new SolidColorBrush(Colors.Red);
             Content = null;
         }
+
+        protected WholeSessionData FieldInformation;
 
         protected override void GameButton_Click(object sender, RoutedEventArgs e)
         {
             if (!IsClicked)
             {
                 MessageBox.Show(this.Coordinates.AsString);
-                ClickHandler clickHandler = new ClickHandlerIsMine(this, WholeSessionData.FirstClickOfGame);
+                ClickHandler clickHandler = new ClickHandlerIsMine(this, FieldInformation);
                 clickHandler.Handle();
             }
         }
