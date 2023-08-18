@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Minesweeper.data.classes
 {
-    internal class PointEvaluater
+    public class PointEvaluater
     {
         public PointEvaluater(string difficulty)
         {
@@ -14,6 +14,7 @@ namespace Minesweeper.data.classes
         }
 
         private string _stringDifficulty;
+
 
 
         public int Evaluate()

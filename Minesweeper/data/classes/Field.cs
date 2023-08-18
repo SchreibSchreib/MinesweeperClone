@@ -11,20 +11,12 @@ namespace Minesweeper.data.classes
         {
             PlayGround = new FieldGenerator(lengthX, lengthY).PlayGround;
             PlayGround = LogicCheckup.Check(PlayGround);
-            _buttons = new ButtonCreator(PlayGround).GameButtons;
+            Buttons = new ButtonCreator(PlayGround, this).GameButtons;
         }
 
 
         public Dictionary<string, bool> PlayGround { get; private set; }
         public static bool FirstClickOfGame = true;
-
-        private static List<GameButton> _buttons = new List<GameButton>();
-
-        public static List<GameButton> Buttons
-        {
-            get { return _buttons; }
-            private set { _buttons = value; }
-
-        }
+        public List<GameButton> Buttons { get; private set; }
     }
 }

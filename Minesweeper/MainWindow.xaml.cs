@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -24,7 +26,53 @@ namespace Minesweeper
     {
         public MainWindow()
         {
+            _difficulty = "medium";
+            _pointEvaluator = new PointEvaluater(_difficulty);
             InitializeComponent();
+        }
+
+        private string _difficulty;
+        private PointEvaluater _pointEvaluator;
+
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            var checkBox = sender as CheckBox;
+            if (checkBox == null)
+            {
+                return;
+            }
+
+            SetDifficulty(checkBox);
+            UncheckOtherCheckBoxes(checkBox);
+        }
+
+        private void SetDifficulty(CheckBox checkBox)
+        {
+            _difficulty = new Difficulty(checkBox).GetDifficulty;
+        }
+
+        private void UncheckOtherCheckBoxes(CheckBox checkBox)
+        {
+            Panel? parentPanel = PanelFinder.GetParentPanel(checkBox);
+            if (parentPanel == null)
+            {
+                Debug.WriteLine("No Panel as Parent found.");
+                return;
+            }
+            List<CheckBox> checkBoxes = ObjectFinder.GetCheckBoxes(parentPanel);
+            foreach (CheckBox box in checkBoxes)
+            {
+                Debug.WriteLine($"{box.Name} found.  Value: {box.IsChecked}");
+                if (box != checkBox)
+                {
+                    box.IsChecked = false;
+                }
+            }
+        }
+
+        private void startButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void leaderBoardButton_Click(object sender, RoutedEventArgs e)
@@ -32,71 +80,6 @@ namespace Minesweeper
 
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //        private void TextBox_X_Direction_GotFocus(object sender, RoutedEventArgs e)
-        //        {
-        //            TextBox? boxClicked = sender as TextBox;
-        //            if (boxClicked?.Name == "TextBox_Y_Direction")
-        //            {
-        //                if (boxClicked.Text == "Felder Y")
-        //                {
-        //                    boxClicked.Text = null;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                if (boxClicked?.Text == "Felder X")
-        //                {
-        //                    boxClicked.Text = null;
-        //                }
-        //            }
-        //        }
-
-        //        private void TextBox_X_Direction_LostFocus(object sender, RoutedEventArgs e)
-        //        {
-        //            TextBox? boxLostFocus = sender as TextBox;
-        //#pragma warning disable CS8602 // Dereferenzierung eines möglichen Nullverweises.
-        //            if (boxLostFocus.Text.Contains(" ") || boxLostFocus.Text.Length == 0 || boxLostFocus.Text == null || Convert.ToInt32(boxLostFocus.Text) < 10 || Convert.ToInt32(boxLostFocus.Text) > 50)
-        //            {
-        //                if (boxLostFocus.Name == "TextBox_Y_Direction")
-        //                {
-        //                    if ((boxLostFocus.Text.Contains(" ") || boxLostFocus.Text.Length == 0 || boxLostFocus.Text == null || Convert.ToInt32(boxLostFocus.Text) < 10 || Convert.ToInt32(boxLostFocus.Text) > 50 || boxLostFocus.Text.Length == 0 || boxLostFocus.Text == null))
-        //                    { 
-        //                        MessageBox.Show("Aktuell werden nur Zahlen zwischen 10 und 50 supportet."); 
-        //                    }
-        //                    boxLostFocus.Text = "Felder Y";
-        //                }
-        //                else
-        //                {
-        //#pragma warning disable CS8602 // Dereferenzierung eines möglichen Nullverweises.
-        //                    if (boxLostFocus.Text.Contains(' ') || boxLostFocus.Text.Length == 0 || boxLostFocus.Text == null || Convert.ToInt32(boxLostFocus.Text) < 10 || Convert.ToInt32(boxLostFocus.Text) > 50)
-        //                    {
-        //                        MessageBox.Show("Aktuell werden nur Zahlen zwischen 10 und 50 supportet.");
-        //                    }
-        //#pragma warning restore CS8602 // Dereferenzierung eines möglichen Nullverweises.
-        //                    boxLostFocus.Text = "Felder X";
-        //                }
-        //            }
-        //#pragma warning restore CS8602 // Dereferenzierung eines möglichen Nullverweises.
-        //        }
-
-        //        private void NumberValidation(object sender, TextCompositionEventArgs e) 
-        //        {
-        //            Regex checkOnlyNumbers = new Regex("[^0-9]+");
-        //            e.Handled = checkOnlyNumbers.IsMatch(e.Text);
-        //        }
 
         //        private void startButton_Click(object sender, RoutedEventArgs e)
         //        {

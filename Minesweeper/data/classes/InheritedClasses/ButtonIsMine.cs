@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using Minesweeper.data.classes.AbstractClasses;
 
 namespace Minesweeper.data.classes.InheritedClasses
@@ -13,7 +14,7 @@ namespace Minesweeper.data.classes.InheritedClasses
         public ButtonIsMine(Coordinates coordOfButton, Dictionary<string, bool> currentGameField)
             : base(coordOfButton, currentGameField)
         {
-
+            Background = new SolidColorBrush(Colors.Red);
         }
 
         protected override void GameButton_Click(object sender, RoutedEventArgs e)

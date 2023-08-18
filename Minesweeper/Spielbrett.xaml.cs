@@ -22,12 +22,12 @@ namespace Minesweeper
     /// <summary>
     /// Interaktionslogik für Spielbrett.xaml
     /// </summary>
-    public partial class Spielbrett : Window
+    public partial class GameBoard : Window
     {
-        public Spielbrett(Field currentGameField)
+        public GameBoard(Field currentGameField, PointEvaluater pointEvaluaterThisSession, Difficulty difficultyThisSession)
         {
             _currentGameField = currentGameField;
-            _buttonsList = Field.Buttons;
+            _buttonsList = currentGameField.Buttons;
             _gridLengthCalculator = new GridLengthCalculator(_buttonsList);
             _xMaxLength = _gridLengthCalculator.CalculateX();
             _yMaxLength = _gridLengthCalculator.CalculateY();
