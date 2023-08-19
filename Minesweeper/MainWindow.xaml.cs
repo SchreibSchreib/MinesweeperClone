@@ -70,8 +70,8 @@ namespace Minesweeper
         {
             string name = NameOfPlayer.Text;
             Points newPoints = new Points();
-            Player newPlayer = new Player(name, newPoints, _difficulty);
-            WholeSessionData currentField = new WholeSessionData(20, 20, newPlayer);
+            Player newPlayer = new Player(name, newPoints, _difficulty, new TimeMeasure());
+            WholeSessionData currentField = new WholeSessionData(newPlayer);
             CompleteGameBoardWindow newGame = new CompleteGameBoardWindow(currentField);
             newGame.Show();
             this.Close();

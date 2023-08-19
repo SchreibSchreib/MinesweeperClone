@@ -52,8 +52,8 @@ namespace Minesweeper
             foreach (GameButton button in _buttonsList)
             {
                 SpawnGrid.Children.Add(button);
-                Grid.SetRow(button, int.Parse(button.Coordinates.AsString.Split(" ")[0]));
-                Grid.SetColumn(button, int.Parse(button.Coordinates.AsString.Split(" ")[1]));
+                Grid.SetColumn(button, int.Parse(button.Coordinates.AsString.Split(" ")[0]));
+                Grid.SetRow(button, int.Parse(button.Coordinates.AsString.Split(" ")[1]));
                 button.Click += Button_Click;
                 button.MouseRightButtonUp += Button_MouseRightButtonUp;
             }
@@ -117,8 +117,8 @@ namespace Minesweeper
             string name = _currentGameField.CurrentPlayer.Name;
             Points newPoints = new Points();
             Difficulty currentDifficulty = _currentGameField.CurrentPlayer.CurrentDifficulty;
-            Player newPlayer = new Player(name, newPoints, currentDifficulty);
-            WholeSessionData currentField = new WholeSessionData(20, 20, newPlayer);
+            Player newPlayer = new Player(name, newPoints, currentDifficulty, new TimeMeasure());
+            WholeSessionData currentField = new WholeSessionData(newPlayer);
             CompleteGameBoardWindow newSession = new CompleteGameBoardWindow(currentField);
             newSession.Show();
             Closer.closeWindow(_currentGameField.Buttons[0]);

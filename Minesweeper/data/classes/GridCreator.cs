@@ -11,8 +11,8 @@ namespace Minesweeper.data.classes
     {
         public GridCreator(int maxXCoords, int maxYCoords, Grid actualGrid)
         {
-            _columns = maxXCoords;
-            _rows = maxYCoords;
+            _columns = maxYCoords;
+            _rows = maxXCoords;
             ActualGrid = actualGrid;
             DefineSpawnGrid();
         }
@@ -27,11 +27,13 @@ namespace Minesweeper.data.classes
             for (int row = 0; row <= _rows; row++)
             {
                 ActualGrid.RowDefinitions.Add(new RowDefinition());
+
+                for (int column = 0; column <= _columns; column++)
+                {
+                    ActualGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                }
             }
-            for (int column = 0; column <= _columns; column++)
-            {
-                ActualGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            }
+
         }
     }
 }

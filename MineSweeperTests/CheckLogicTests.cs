@@ -6,11 +6,11 @@ namespace MineSweeperTests;
 [TestFixture]
 public class CheckLogicTests
 {
-    [TestCase(10, 10)]
-    [TestCase(27, 27)]
-    [TestCase(13, 70)]
-    [TestCase(100, 100)]
-    public void CheckLogic_NoMinesAround_ReturnsUnchangedDictionary(int xAxis, int yAxis)
+    [TestCase(10, 10, 3)]
+    [TestCase(27, 27, 1)]
+    [TestCase(13, 70, 4)]
+    [TestCase(100, 100, 2)]
+    public void CheckLogic_NoMinesAround_ReturnsUnchangedDictionary(int xAxis, int yAxis, int maxMines)
     {
         //Arrange
         Dictionary<string, bool> dictrionaryAllValuesFalse = new FieldGenerator(xAxis, yAxis).PlayGround;
@@ -21,7 +21,7 @@ public class CheckLogicTests
         }
 
         //Act
-        Dictionary<string, bool> result = LogicCheckup.Check(dictrionaryAllValuesFalse);
+        Dictionary<string, bool> result = LogicCheckup.Check(dictrionaryAllValuesFalse, maxMines);
 
         //Assert
         bool areAnyKeyValuesDifferent = false;
@@ -37,11 +37,11 @@ public class CheckLogicTests
         Assert.IsFalse(areAnyKeyValuesDifferent);
     }
 
-    [TestCase(37, 37)]
-    [TestCase(45, 45)]
-    [TestCase(50, 27)]
-    [TestCase(100, 100)]
-    public void CheckLogic_MinesAround_ReturnsChangedDictionary(int xAxis, int yAxis)
+    [TestCase(37, 37, 2)]
+    [TestCase(45, 45, 4)]
+    [TestCase(50, 27, 3)]
+    [TestCase(100, 100, 4)]
+    public void CheckLogic_MinesAround_ReturnsChangedDictionary(int xAxis, int yAxis, int maxMines)
     {
         //Arrange
         Dictionary<string, bool> dictionaryPlayground = new FieldGenerator(xAxis, yAxis).PlayGround;
@@ -52,7 +52,7 @@ public class CheckLogicTests
         {
             result.Add(kvp.Key, kvp.Value);
         }
-        result = LogicCheckup.Check(result);
+        result = LogicCheckup.Check(result, maxMines);
 
         //Assert
         bool areAnyKeyValuesDifferent = false;
@@ -68,14 +68,14 @@ public class CheckLogicTests
         Assert.IsTrue(areAnyKeyValuesDifferent);
     }
 
-    [TestCase(1, 1)]
-    public void CheckLogic_OnlyOneMineAround_ReturnsUnchangedDictionary(int xAxis, int yAxis)
+    [TestCase(1, 1, 1)]
+    public void CheckLogic_OnlyOneMineAround_ReturnsUnchangedDictionary(int xAxis, int yAxis, int maxMines)
     {
         //Arrange
         Dictionary<string, bool> dictrionaryOnlyOneMine = new FieldGenerator(xAxis, yAxis).PlayGround;
 
         //Act
-        Dictionary<string, bool> result = LogicCheckup.Check(dictrionaryOnlyOneMine);
+        Dictionary<string, bool> result = LogicCheckup.Check(dictrionaryOnlyOneMine, maxMines);
 
         //Assert
         bool areAnyKeyValuesDifferent = false;

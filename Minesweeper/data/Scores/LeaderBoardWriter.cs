@@ -1,9 +1,11 @@
 ﻿using Minesweeper.data.classes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Minesweeper.data.Scores
@@ -15,10 +17,19 @@ namespace Minesweeper.data.Scores
         
         public static string GetLeaderBoardPath() => Path.Combine(_projectFolder, _fileName);
 
-        public static void WritePlayerList()
+        public static void WritePlayerList(Player currentPlayer)
         {
             List<Player> allPlayerDatas = LeaderboardReader.GetPlayerList();
+            allPlayerDatas.Add(currentPlayer);
+            string jsonString = JsonSerializer.Serialize(allPlayerDatas);
 
+            if (!File.Exists(GetLeaderBoardPath()))
+            {
+                File.Create(GetLeaderBoardPath()).Close();
+            }
+            File.WriteAllText(GetLeaderBoardPath(), jsonString);
+
+            Debug.WriteLine("Dateien wurden geschrieben.");
         }
     }
 }
