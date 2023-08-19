@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
         AllowsTransparency="False"
-        WindowStyle="None"
+        WindowStyle="SingleBorderWindow"
         Title="MainWindow" Height="720" Width="1280">
     <Window.Resources>
         <Storyboard x:Key="BackgroundAnimation" RepeatBehavior="Forever">
@@ -67,7 +67,7 @@
                 <EventTrigger RoutedEvent="Window.Loaded">
                     <BeginStoryboard>
                         <Storyboard RepeatBehavior="Forever">
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)" BeginTime="0:0:3" Duration="0:0:6" To="1600"/>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)" BeginTime="0:0:3" Duration="0:0:6" To="3600"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -83,9 +83,8 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Frame x:Name="FrameForLeaderBoard"/>
         <Canvas>
-            <Border Width="1861" Height="871" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="3">
+            <Border Width="2560" Height="1710" Grid.RowSpan="3" Canvas.Left="-10" Canvas.Top="-20">
                 <Border.Background>
                     <ImageBrush ImageSource="data/graphics/MineSweeperBackground.png" Stretch="UniformToFill"/>
                 </Border.Background>
@@ -115,14 +114,14 @@
                 <RowDefinition Height="15*"/>
                 <RowDefinition Height="15*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="startButton" Click="StartButton_Click" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Margin="60,5,60,5" Background="#FF9ECFF5" BorderBrush="#99000000" Content="Start"  FontSize="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="DemiBold">
+            <Button x:Name="startButton" Click="StartButton_Click" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Margin="60,5,60,5" Background="#FF9ECFF5" BorderBrush="#99000000" Content="Start"  FontSize="34" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="DemiBold">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button x:Name="leaderBoardButton" Click="leaderBoardButton_Click" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Margin="60,5,60,5" Background="#FF9ECFF5" BorderBrush="#99000000" UseLayoutRounding="False" Content="LeaderBoard" FontSize="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="DemiBold">
+            <Button x:Name="leaderBoardButton" Click="leaderBoardButton_Click" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Margin="60,5,60,5" Background="#FF9ECFF5" BorderBrush="#99000000" UseLayoutRounding="False" Content="LeaderBoard" FontSize="34" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="DemiBold" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20"/>
@@ -228,5 +227,6 @@
                 </TextBlock.Foreground>
             </TextBlock>
         </Grid>
+        <Frame Grid.RowSpan="3" x:Name="FrameForLeaderBoard"/>
     </Grid>
 </Window>

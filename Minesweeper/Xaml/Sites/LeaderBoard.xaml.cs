@@ -57,15 +57,26 @@ namespace Minesweeper.Xaml.Sites
         {
             for (int row = 0; row < 10; row++)
             {
-                for (int column = 0; column < 2; column++)
+                for (int column = 0; column < 3; column++)
                 {
                     string text = _splittedData[row][column];
-                    TextBlock textBlock = new TextBlock();
+                    TextBlock textBlock = new TextBlockStyler(new TextBlock()).StyledTextBox;
                     textBlock.Text = text;
 
                     Grid.SetRow(textBlock, row);
                     Grid.SetColumn(textBlock, column);
+                    CurrentLeaderBoard.Children.Add(textBlock);
                 }
+            }
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+            {
+                // Leere den Frame, um zur Hauptansicht zurückzukehren
+                mainWindow.FrameForLeaderBoard.NavigationService.Navigate(null);
             }
         }
     }

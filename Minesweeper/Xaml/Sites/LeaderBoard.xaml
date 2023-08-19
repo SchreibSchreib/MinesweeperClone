@@ -16,8 +16,9 @@
         </Border>
         <Border Background="#805F5454" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         </Border>
-        <Grid x:Name="CurrentLeaderBoard" Margin="100,50" >
+        <Grid x:Name="CurrentLeaderBoard" Margin="100,30,100,10" >
             <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -34,7 +35,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Border Grid.Row="0" Grid.Column="0" BorderThickness="5" Grid.ColumnSpan="3" Grid.RowSpan="11" CornerRadius="50" BorderBrush="Black">
+            <Border Grid.Row="0" Grid.Column="0" BorderThickness="5" Grid.ColumnSpan="3" Grid.RowSpan="10" CornerRadius="50" BorderBrush="Black">
                 <Border.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#7FB30303" Offset="0.77"/>
@@ -46,7 +47,14 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
-            <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="11" BorderThickness="5,0,5,0" BorderBrush="Black"/>
+            <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="10" BorderThickness="5,0,5,0" BorderBrush="Black"/>
+            <Button Click="Back_Click" Content="Back" Grid.Row="11" FontSize="29" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="150,20,150,0" Grid.ColumnSpan="3" BorderThickness="1" Background="#FF9ECFF5" BorderBrush="#99000000">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </Grid>
     </Grid>
 </Page>
