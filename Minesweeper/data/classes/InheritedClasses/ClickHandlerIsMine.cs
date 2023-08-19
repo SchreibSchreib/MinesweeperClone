@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection.Metadata;
 
 namespace Minesweeper.data.classes.InheritedClasses
 {
@@ -12,9 +13,16 @@ namespace Minesweeper.data.classes.InheritedClasses
         public ClickHandlerIsMine(GameButton clickedButton, WholeSessionData fieldInformation) : base(clickedButton, fieldInformation)
         {
 
+        }
+
+
+        public override void Handle()
+        {
+            _clickedButton.IsClicked = true;
             MainWindow backToMain = new MainWindow();
             backToMain.Show();
-            Closer.closeWindow(clickedButton);
+            Closer.closeWindow(_clickedButton);
         }
+
     }
 }

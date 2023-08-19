@@ -16,18 +16,19 @@ namespace Minesweeper.data.classes.InheritedClasses
         {
             FieldInformation = fieldInformation;
             Background = new SolidColorBrush(Colors.Red);
+            ThisClickHandler = new ClickHandlerIsMine(this, FieldInformation);
             Content = null;
         }
+
+        public ClickHandler ThisClickHandler { get; protected set; }
 
         protected WholeSessionData FieldInformation;
 
         protected override void GameButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!IsClicked)
+            if (!IsClicked && !IsDefused)
             {
-                MessageBox.Show(this.Coordinates.AsString);
-                ClickHandler clickHandler = new ClickHandlerIsMine(this, FieldInformation);
-                clickHandler.Handle();
+                ThisClickHandler.Handle();
             }
         }
     }

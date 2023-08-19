@@ -35,13 +35,13 @@
                     <ColumnDefinition Width="79"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" BorderThickness="2" BorderBrush="#FF7D7474">
-                    <TextBlock x:Name="minesLeft" FontSize="30" FontWeight="Bold" TextAlignment="Center" Background="Black" Foreground="#FFFB0007"/>
+                    <TextBlock x:Name="MinesLeft" FontSize="30" FontWeight="Bold" TextAlignment="Center" Background="Black" Foreground="#FFFB0007"/>
                 </Border>
                 <Button x:Name="resetButton" Grid.Column="2" Padding="0" Margin="0,8,0,8">
                     <Image x:Name="resetButtonImage" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/data\graphics\MinesweeperFace.png" />
                 </Button>
                 <Border Grid.Column="4" BorderThickness="2" BorderBrush="#FF7D7474">
-                    <TextBlock x:Name="timer" FontSize="30" FontWeight="Bold" TextAlignment="Center" Background="Black" Foreground="#FFFB0007"/>
+                    <TextBlock x:Name="Timer" FontSize="30" FontWeight="Bold" TextAlignment="Center" Background="Black" Foreground="#FFFB0007"/>
                 </Border>
             </Grid>
         </Grid>

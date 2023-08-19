@@ -1,6 +1,8 @@
 ﻿using Minesweeper.data.classes.AbstractClasses;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace Minesweeper.data.classes.InheritedClasses
 {
@@ -10,18 +12,22 @@ namespace Minesweeper.data.classes.InheritedClasses
             : base(coordOfButton, currentGameField)
         {
             FieldInformation = fieldInformation;
+            ThisClickHandler = new ClickHandlerNoMine(this, FieldInformation);
         }
+
+        public ClickHandler ThisClickHandler { get; protected set; }
 
         protected WholeSessionData FieldInformation;
 
         protected override void GameButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(this.Coordinates.AsString);
-            ClickHandler thisButton = new ClickHandlerNoMine(this, FieldInformation);
-            BroadSearchAlgorithm broadSearchThisClick = new BroadSearchAlgorithm(this, CurrentGameField, FieldInformation.Buttons, FieldInformation);
-            broadSearchThisClick.CheckForButtonsWithZeroMines();
-            broadSearchThisClick.ToggleButtons();
-            thisButton.Handle();
+            if (!IsClicked && !IsDefused)
+            {
+                BroadSearchAlgorithm broadSearchThisClick = new BroadSearchAlgorithm(this, CurrentGameField, FieldInformation.Buttons, FieldInformation);
+                broadSearchThisClick.CheckForButtonsWithZeroMines();
+                broadSearchThisClick.ToggleButtons();
+                ThisClickHandler.Handle();
+            }
         }
     }
 }

@@ -6,26 +6,13 @@ namespace Minesweeper.data.classes.AbstractClasses
     {
         public ClickHandler(GameButton clickedButton, WholeSessionData currentSession)
         {
-            _isFirstClick = currentSession.FirstClickOfGame;
-            _clickedButton = clickedButton;
-            clickedButton.IsClicked = true;
-
-            if (_isFirstClick)
-            {
-                currentSession.FirstClickOfGame = false;
-            }
+            _currentSession = currentSession;
+            _clickedButton = clickedButton;           
         }
 
-        private bool _isFirstClick;
-        private GameButton _clickedButton;
+        protected WholeSessionData _currentSession;
+        protected GameButton _clickedButton;
 
-        public void Handle()
-        {
-            if (_isFirstClick)
-            {
-                TimeMeasure stopWatch = new TimeMeasure(new DispatcherTimer());
-            }
-            _clickedButton.UpDateButtonInformation();
-        }
+        public abstract void Handle();
     }
 }

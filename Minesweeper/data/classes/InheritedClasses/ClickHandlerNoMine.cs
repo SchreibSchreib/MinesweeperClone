@@ -9,5 +9,15 @@ namespace Minesweeper.data.classes.InheritedClasses
         {
             currentSession.CurrentPlayer.Points.Add();
         }
+
+        public override void Handle()
+        {
+            if (_currentSession.FirstClickOfGame)
+            {
+                _currentSession.ToggleFirstClickFalse();
+            }
+            _clickedButton.IsClicked = true;
+            _clickedButton.UpDateButtonInformation();
+        }
     }
 }
