@@ -27,12 +27,13 @@ namespace Minesweeper
             _gridLengthCalculator = new GridLengthCalculator(_buttonsList);
             _xMaxLength = _gridLengthCalculator.CalculateX();
             _yMaxLength = _gridLengthCalculator.CalculateY();
-            _maxMines = GetMinesOnBoard();
+            _undiscoveredMines = GetAllMinesOnBoard();
             _seconds = _currentGameField.CurrentPlayer.CurrentTimer.GetSeconds;
             _firstClickOfGame = true;
             SpawnGrid = GetGameGrid();
-            MinesLeft.Text = _maxMines.ToString();
-            Timer.Text = _seconds.ToString();
+            MinesLeft.Text = _undiscoveredMines.ToString();
+            //Timer.Text = _seconds.ToString();
+            Timer.Text = "99999";
             LoadButtonsToGrid();
         }
 
@@ -42,7 +43,7 @@ namespace Minesweeper
         private bool _firstClickOfGame;
         private int _xMaxLength;
         private int _yMaxLength;
-        private int _maxMines;
+        private int _undiscoveredMines;
         private int _seconds;
 
         private Grid GetGameGrid() => new GridCreator(_xMaxLength, _yMaxLength, SpawnGrid).ActualGrid;
@@ -59,7 +60,7 @@ namespace Minesweeper
             }
         }
 
-        private int GetMinesOnBoard()
+        private int GetAllMinesOnBoard()
         {
             int mines = 0;
             foreach (GameButton button in _buttonsList)
@@ -72,19 +73,39 @@ namespace Minesweeper
             return mines;
         }
 
-        public void UpdateGameInformation()
+        private int GetDefuses()
+        {
+            int defuses = 0;
+            foreach (GameButton button in _buttonsList)
+            {
+                if (button.IsDefused)
+                {
+                    defuses++;
+                }
+            }
+            return defuses;
+        }
+
+        private void UpdateGameInformation()
         {
             if (_firstClickOfGame)
             {
                 _firstClickOfGame = _currentGameField.FirstClickOfGame;
-                _currentGameField.CurrentPlayer.CurrentTimer.Start();
+                _currentGameField.CurrentPlayer.CurrentTimer.Seconds.Start();
+                _currentGameField.CurrentPlayer.CurrentTimer.Seconds.Tick += Seconds_Tick; ;
             }
-            
+            MinesLeft.Text = (GetAllMinesOnBoard()-GetDefuses()).ToString();
         }
 
+        private void Seconds_Tick(object? sender, EventArgs e)
+        {
+            _seconds++;
+            Timer.Text = _seconds.ToString();
+        }
 
         private void Button_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
+            UpdateGameInformation();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

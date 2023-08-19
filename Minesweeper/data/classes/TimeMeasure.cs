@@ -12,21 +12,17 @@ namespace Minesweeper.data.classes
         public TimeMeasure()
         {
             DispatcherTimer newTimer = new DispatcherTimer();
-            _seconds = newTimer;
-            _seconds.Tick += Timer_Tick;
+            newTimer.Interval = new TimeSpan(0, 0, 1);
+            newTimer.Tick += NewTimer_Tick;
+            Seconds = newTimer;
         }
 
-        private DispatcherTimer _seconds;
+        public DispatcherTimer Seconds { get; private set; }
         public int GetSeconds { get; private set; }
 
-        private void Timer_Tick(object? sender, EventArgs e)
+        private void NewTimer_Tick(object? sender, EventArgs e)
         {
             GetSeconds++;
-        }
-
-        public void Start()
-        {
-            _seconds.Start();
         }
     }
 }
