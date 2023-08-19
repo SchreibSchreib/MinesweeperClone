@@ -26,9 +26,8 @@ namespace Minesweeper.data.classes.InheritedClasses
 
         protected override void GameButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!IsClicked)
+            if (!IsClicked && !IsDefused)
             {
-                MessageBox.Show(this.Coordinates.AsString);
                 ThisClickHandler.Handle();
             }
         }

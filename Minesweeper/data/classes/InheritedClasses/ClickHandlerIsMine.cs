@@ -12,10 +12,9 @@ namespace Minesweeper.data.classes.InheritedClasses
     {
         public ClickHandlerIsMine(GameButton clickedButton, WholeSessionData fieldInformation) : base(clickedButton, fieldInformation)
         {
-            _clickedButton = clickedButton;
+
         }
 
-        private GameButton _clickedButton;
 
         public override void Handle()
         {

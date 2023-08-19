@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace Minesweeper
 {
-    /// <summary>
-    /// Interaktionslogik für GamePage.xaml
-    /// </summary>
     public partial class GamePage : Page
     {
         public GamePage(WholeSessionData currentGameField)
@@ -32,6 +29,7 @@ namespace Minesweeper
             _yMaxLength = _gridLengthCalculator.CalculateY();
             _maxMines = GetMinesOnBoard();
             _seconds = _currentGameField.CurrentPlayer.CurrentTimer.GetSeconds;
+            _firstClickOfGame = true;
             SpawnGrid = GetGameGrid();
             MinesLeft.Text = _maxMines.ToString();
             Timer.Text = _seconds.ToString();
@@ -41,6 +39,7 @@ namespace Minesweeper
         private WholeSessionData _currentGameField;
         private List<GameButton> _buttonsList;
         private GridLengthCalculator _gridLengthCalculator;
+        private bool _firstClickOfGame;
         private int _xMaxLength;
         private int _yMaxLength;
         private int _maxMines;
@@ -55,6 +54,8 @@ namespace Minesweeper
                 SpawnGrid.Children.Add(button);
                 Grid.SetRow(button, int.Parse(button.Coordinates.AsString.Split(" ")[0]));
                 Grid.SetColumn(button, int.Parse(button.Coordinates.AsString.Split(" ")[1]));
+                button.Click += Button_Click;
+                button.MouseRightButtonUp += Button_MouseRightButtonUp;
             }
         }
 
@@ -71,15 +72,24 @@ namespace Minesweeper
             return mines;
         }
 
-        private bool CheckFirstClick() => _currentGameField.FirstClickOfGame;
-
         public void UpdateGameInformation()
         {
-            if (CheckFirstClick())
+            if (_firstClickOfGame)
             {
+                _firstClickOfGame = _currentGameField.FirstClickOfGame;
                 _currentGameField.CurrentPlayer.CurrentTimer.Start();
             }
             
+        }
+
+
+        private void Button_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateGameInformation();
         }
     }
 }

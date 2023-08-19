@@ -1,6 +1,8 @@
 ﻿using Minesweeper.data.classes.AbstractClasses;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace Minesweeper.data.classes.InheritedClasses
 {
@@ -19,11 +21,13 @@ namespace Minesweeper.data.classes.InheritedClasses
 
         protected override void GameButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(this.Coordinates.AsString);
-            BroadSearchAlgorithm broadSearchThisClick = new BroadSearchAlgorithm(this, CurrentGameField, FieldInformation.Buttons, FieldInformation);
-            broadSearchThisClick.CheckForButtonsWithZeroMines();
-            broadSearchThisClick.ToggleButtons();
-            ThisClickHandler.Handle();
+            if (!IsClicked && !IsDefused)
+            {
+                BroadSearchAlgorithm broadSearchThisClick = new BroadSearchAlgorithm(this, CurrentGameField, FieldInformation.Buttons, FieldInformation);
+                broadSearchThisClick.CheckForButtonsWithZeroMines();
+                broadSearchThisClick.ToggleButtons();
+                ThisClickHandler.Handle();
+            }
         }
     }
 }
