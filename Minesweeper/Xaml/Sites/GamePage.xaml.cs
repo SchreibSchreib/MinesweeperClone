@@ -32,8 +32,7 @@ namespace Minesweeper
             _firstClickOfGame = true;
             SpawnGrid = GetGameGrid();
             MinesLeft.Text = _undiscoveredMines.ToString();
-            //Timer.Text = _seconds.ToString();
-            Timer.Text = "99999";
+            Timer.Text = _seconds.ToString();
             LoadButtonsToGrid();
         }
 

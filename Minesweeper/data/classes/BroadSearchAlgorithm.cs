@@ -81,7 +81,7 @@ namespace Minesweeper.data.classes
             {
                 foreach (GameButton gameButton in _buttonList)
                 {
-                    if (gameButton.Coordinates.AsString == buttonName)
+                    if (gameButton.Coordinates.AsString == buttonName && !gameButton.IsDefused)
                     {
                         ClickHandler clickHandler = new ClickHandlerNoMine(gameButton, _wholeSessionData);
                         clickHandler.Handle();
