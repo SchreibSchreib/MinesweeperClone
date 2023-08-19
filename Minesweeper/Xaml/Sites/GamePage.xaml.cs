@@ -93,7 +93,7 @@ namespace Minesweeper
                 _currentGameField.CurrentPlayer.CurrentTimer.Seconds.Start();
                 _currentGameField.CurrentPlayer.CurrentTimer.Seconds.Tick += Seconds_Tick; ;
             }
-            MinesLeft.Text = (GetAllMinesOnBoard()-GetDefuses()).ToString();
+            MinesLeft.Text = (GetAllMinesOnBoard() - GetDefuses()).ToString();
         }
 
         private void Seconds_Tick(object? sender, EventArgs e)
@@ -110,6 +110,18 @@ namespace Minesweeper
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             UpdateGameInformation();
+        }
+
+        private void resetButton_Click(object sender, RoutedEventArgs e)
+        {
+            string name = _currentGameField.CurrentPlayer.Name;
+            Points newPoints = new Points();
+            Difficulty currentDifficulty = _currentGameField.CurrentPlayer.CurrentDifficulty;
+            Player newPlayer = new Player(name, newPoints, currentDifficulty);
+            WholeSessionData currentField = new WholeSessionData(20, 20, newPlayer);
+            CompleteGameBoardWindow newSession = new CompleteGameBoardWindow(currentField);
+            newSession.Show();
+            Closer.closeWindow(_currentGameField.Buttons[0]);
         }
     }
 }

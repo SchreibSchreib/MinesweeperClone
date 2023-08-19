@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         AllowsTransparency="False"
         WindowStyle="SingleBorderWindow"
-        Title="MainWindow" Height="720" Width="1280">
+        WindowState="Maximized"
+        Title="MainWindow" Height="1080" Width="1920">
     <Window.Resources>
         <Storyboard x:Key="BackgroundAnimation" RepeatBehavior="Forever">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
