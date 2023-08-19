@@ -32,10 +32,10 @@ namespace Minesweeper.data.classes.AbstractClasses
         public bool IsClicked { protected get; set; }
         public int MinesAround { get; protected set; }
         public Coordinates Coordinates { get; protected set; }
+        public bool Behaviour { get; protected set; }
 
         protected Dictionary<string, bool> CurrentGameField;
         protected Color ColorOfButton;
-        protected bool Behaviour;
         protected ColorAnimation FadingColor;
 
         protected SolidColorBrush? GetSolidColorBrushOfNumber()

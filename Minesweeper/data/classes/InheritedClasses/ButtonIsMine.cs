@@ -27,7 +27,7 @@ namespace Minesweeper.data.classes.InheritedClasses
             {
                 MessageBox.Show(this.Coordinates.AsString);
                 ClickHandler clickHandler = new ClickHandlerIsMine(this, FieldInformation);
-                clickHandler.Handle();
+                //clickHandler.Handle();
             }
         }
     }

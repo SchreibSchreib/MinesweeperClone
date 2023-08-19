@@ -10,18 +10,19 @@ namespace Minesweeper.data.classes.InheritedClasses
             : base(coordOfButton, currentGameField)
         {
             FieldInformation = fieldInformation;
+            ThisClickHandler = new ClickHandlerNoMine(this, FieldInformation);
         }
 
+        public ClickHandler ThisClickHandler { get; protected set; }
         protected WholeSessionData FieldInformation;
 
         protected override void GameButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(this.Coordinates.AsString);
-            ClickHandler thisButton = new ClickHandlerNoMine(this, FieldInformation);
             BroadSearchAlgorithm broadSearchThisClick = new BroadSearchAlgorithm(this, CurrentGameField, FieldInformation.Buttons, FieldInformation);
             broadSearchThisClick.CheckForButtonsWithZeroMines();
             broadSearchThisClick.ToggleButtons();
-            thisButton.Handle();
+            ThisClickHandler.Handle();
         }
     }
 }

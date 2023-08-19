@@ -8,16 +8,16 @@ namespace Minesweeper.data.classes
 {
     public static class PointEvaluator
     {
-        public static int Evaluate(string difficulty, int points)
+        public static int Evaluate(string difficulty, int points, int time)
         {
             switch (difficulty)
             {
                 case ("easy"):
-                    return points * (750 - TimeMeasure.TimeInSeconds) * (int)Difficulty.Rank.easy;
+                    return points * (750 - time) * (int)Difficulty.Rank.easy;
                 case ("hard"):
-                    return points * (1000 - TimeMeasure.TimeInSeconds) * (int)Difficulty.Rank.hard;
+                    return points * (1000 - time) * (int)Difficulty.Rank.hard;
                 default:
-                    return points * (900 - TimeMeasure.TimeInSeconds) * (int)Difficulty.Rank.medium;
+                    return points * (900 - time) * (int)Difficulty.Rank.medium;
             }
 
         }

@@ -12,8 +12,9 @@ namespace Minesweeper.data.classes.AbstractClasses
 
             if (_isFirstClick)
             {
-                currentSession.FirstClickOfGame = false;
+                currentSession.ToggleFirstClickFalse();
             }
+            
         }
 
         private bool _isFirstClick;
@@ -21,10 +22,6 @@ namespace Minesweeper.data.classes.AbstractClasses
 
         public void Handle()
         {
-            if (_isFirstClick)
-            {
-                TimeMeasure stopWatch = new TimeMeasure(new DispatcherTimer());
-            }
             _clickedButton.UpDateButtonInformation();
         }
     }

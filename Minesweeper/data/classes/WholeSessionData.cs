@@ -13,12 +13,18 @@ namespace Minesweeper.data.classes
             PlayGround = new FieldGenerator(lengthX, lengthY).PlayGround;
             PlayGround = LogicCheckup.Check(PlayGround);
             Buttons = new ButtonCreator(PlayGround, this).GameButtons;
+            FirstClickOfGame = true;
         }
 
 
         public Dictionary<string, bool> PlayGround { get; private set; }
-        public bool FirstClickOfGame = true;
+        public bool FirstClickOfGame { get; private set; }
         public List<GameButton> Buttons { get; private set; }
         public Player CurrentPlayer { get; private set; }
+
+        public void ToggleFirstClickFalse()
+        {
+            FirstClickOfGame = false;
+        }
     }
 }
