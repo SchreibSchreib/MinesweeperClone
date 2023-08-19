@@ -13,7 +13,6 @@
     <None Remove="data\graphics\Mine.png" />
     <None Remove="data\graphics\MineSweeperBackground.png" />
     <None Remove="data\graphics\MinesweeperFace.png" />
-    <None Remove="data\graphics\ScaredFace.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,13 +31,6 @@
     <Resource Include="data\graphics\MinesweeperFace.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="data\graphics\ScaredFace.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="data\Scores\" />
   </ItemGroup>
 
 </Project>
