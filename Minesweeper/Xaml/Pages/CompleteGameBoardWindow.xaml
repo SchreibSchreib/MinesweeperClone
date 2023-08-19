@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
-        Title="CompleteGameBoardWindow" Height="720" Width="1280">
+        WindowState="Maximized"
+        Title="CompleteGameBoardWindow" Height="1080" Width="1980">
     <Grid>
         <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Border.Background>
