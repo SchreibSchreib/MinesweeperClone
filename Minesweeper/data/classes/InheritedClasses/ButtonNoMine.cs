@@ -14,6 +14,7 @@ namespace Minesweeper.data.classes.InheritedClasses
         }
 
         public ClickHandler ThisClickHandler { get; protected set; }
+
         protected WholeSessionData FieldInformation;
 
         protected override void GameButton_Click(object sender, RoutedEventArgs e)

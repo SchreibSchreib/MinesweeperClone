@@ -8,7 +8,6 @@ namespace Minesweeper.data.classes.AbstractClasses
         {
             _isFirstClick = currentSession.FirstClickOfGame;
             _clickedButton = clickedButton;
-            clickedButton.IsClicked = true;
 
             if (_isFirstClick)
             {
@@ -20,8 +19,9 @@ namespace Minesweeper.data.classes.AbstractClasses
         private bool _isFirstClick;
         private GameButton _clickedButton;
 
-        public void Handle()
+        public virtual void Handle()
         {
+            _clickedButton.IsClicked = true;
             _clickedButton.UpDateButtonInformation();
         }
     }

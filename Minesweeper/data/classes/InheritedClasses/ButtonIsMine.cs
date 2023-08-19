@@ -16,8 +16,11 @@ namespace Minesweeper.data.classes.InheritedClasses
         {
             FieldInformation = fieldInformation;
             Background = new SolidColorBrush(Colors.Red);
+            ThisClickHandler = new ClickHandlerIsMine(this, FieldInformation);
             Content = null;
         }
+
+        public ClickHandler ThisClickHandler { get; protected set; }
 
         protected WholeSessionData FieldInformation;
 
@@ -26,8 +29,7 @@ namespace Minesweeper.data.classes.InheritedClasses
             if (!IsClicked)
             {
                 MessageBox.Show(this.Coordinates.AsString);
-                ClickHandler clickHandler = new ClickHandlerIsMine(this, FieldInformation);
-                //clickHandler.Handle();
+                ThisClickHandler.Handle();
             }
         }
     }
