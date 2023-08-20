@@ -13,6 +13,10 @@ namespace Minesweeper.data.classes.InheritedClasses
 
         public override void Handle()
         {
+            if (_currentSession.FirstClickOfGame)
+            {
+                _currentSession.ToggleFirstClickFalse();
+            }
         }
 
     }

@@ -22,7 +22,7 @@ namespace Minesweeper
             _yMaxLength = _gridLengthCalculator.CalculateY();
             _undiscoveredMines = GetAllMinesOnBoard();
             _seconds = _currentSession.CurrentPlayer.CurrentTimer.GetSeconds;
-            _firstClickOfGame = true;
+            _firstClickOfGame = currentGameField.FirstClickOfGame;
             SpawnGrid = GetGameGrid();
             MinesLeft.Text = _undiscoveredMines.ToString();
             Timer.Text = _seconds.ToString();
@@ -48,6 +48,7 @@ namespace Minesweeper
                 Grid.SetColumn(button, int.Parse(button.Coordinates.AsString.Split(" ")[0]));
                 Grid.SetRow(button, int.Parse(button.Coordinates.AsString.Split(" ")[1]));
                 button.Click += Button_Click;
+                button.MouseRightButtonUp += Button_MouseRightButtonUp;
             }
         }
 
@@ -77,27 +78,22 @@ namespace Minesweeper
             return defuses;
         }
 
-        private void UpdateGameInformation(GameButton clickedButton)
+        private void ExecuteGameStartAndEndings(GameButton clickedButton)
         {
-            if (_firstClickOfGame && !clickedButton.Behaviour)
+            if (_firstClickOfGame)
             {
-                _firstClickOfGame = _currentSession.FirstClickOfGame;
+                _firstClickOfGame = false;
                 _currentSession.CurrentPlayer.CurrentTimer.Seconds.Start();
-                _currentSession.CurrentPlayer.CurrentTimer.Seconds.Tick += Seconds_Tick; ;
+                _currentSession.CurrentPlayer.CurrentTimer.Seconds.Tick += Seconds_Tick;
             }
-            else if (IsGameFinished() || clickedButton.Behaviour)
+            if (IsGameFinished())
             {
-                EvaluateWinOrLose(clickedButton);
-                _currentSession.CurrentPlayer.CurrentTimer.Stop(_currentSession.CurrentPlayer);
-                LeaderBoardWriter.WritePlayerList(_currentSession.CurrentPlayer);
-                if (clickedButton.Behaviour)
-                {
-                    MainWindow backToMain = new MainWindow();
-                    backToMain.Show();
-                    Closer.closeWindow(clickedButton);
-                }
+                ExecuteWin();
             }
-            MinesLeft.Text = (GetAllMinesOnBoard() - GetDefuses()).ToString();
+            else if (clickedButton.Behaviour && !clickedButton.IsDefused)
+            {
+                ExecuteLose(clickedButton);
+            }
         }
 
         private bool IsGameFinished()
@@ -122,11 +118,7 @@ namespace Minesweeper
 
         private void Button_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var clickedButton = sender as GameButton;
-            if (clickedButton != null)
-            {
-                UpdateGameInformation(clickedButton);
-            }
+            MinesLeft.Text = (GetAllMinesOnBoard() - GetDefuses()).ToString();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -134,7 +126,7 @@ namespace Minesweeper
             var clickedButton = sender as GameButton;
             if (clickedButton != null)
             {
-                UpdateGameInformation(clickedButton);
+                ExecuteGameStartAndEndings(clickedButton);
             }
 
         }
@@ -151,20 +143,36 @@ namespace Minesweeper
             Closer.closeWindow(_currentSession.Buttons[0]);
         }
 
-        private void EvaluateWinOrLose(GameButton clickedButton)
+        private void ExecuteLose(GameButton clickedButton)
         {
-            if (clickedButton.Behaviour)
-            {
-                string path = "/data/graphics/LoseFace.png";
-                resetButton.Content = new Image() { Source = new BitmapImage(new Uri(path, UriKind.Relative)) };
-                MessageBox.Show("You Lose :(");
-            }
-            else
-            {
-                string path = "/data/graphics/WinFace.png";
-                resetButton.Content = new Image() { Source = new BitmapImage(new Uri(path, UriKind.Relative)) };
-                MessageBox.Show("You Win :)");
-            }
+            string path = "/data/graphics/LoseFace.png";
+            resetButton.Content = new Image() { Source = new BitmapImage(new Uri(path, UriKind.Relative)) };
+            MessageBox.Show("You Lose :(");
+            CalculatePoints();
+            CloseSession(clickedButton);
+        }
+
+        private void ExecuteWin()
+        {
+            string path = "/data/graphics/WinFace.png";
+            resetButton.Content = new Image() { Source = new BitmapImage(new Uri(path, UriKind.Relative)) };
+            MessageBox.Show("You Win :)");
+            CalculatePoints();
+        }
+
+        private void CloseSession(GameButton clickedButton)
+        {
+            MainWindow backToMain = new MainWindow();
+            backToMain.Show();
+            Closer.closeWindow(clickedButton);
+        }
+
+        private void CalculatePoints()
+        {
+            _currentSession.CurrentPlayer.CurrentTimer.Stop(_currentSession.CurrentPlayer);
+            LeaderBoardWriter.WritePlayerList(_currentSession.CurrentPlayer);
         }
     }
 }
+
+
