@@ -12,12 +12,12 @@ namespace Minesweeper.data.classes
         {
             switch (difficulty)
             {
-                case ("easy"):
-                    return points * (750 - time) * (int)Difficulty.Rank.easy;
-                case ("hard"):
-                    return points * (1000 - time) * (int)Difficulty.Rank.hard;
+                case ("Easy"):
+                    return points * (250 - (time + 1) / 5) * (int)Difficulty.Rank.easy;
+                case ("Hard"):
+                    return points * (250 - (time + 1) / 5) * (int)Difficulty.Rank.hard;
                 default:
-                    return points * (900 - time) * (int)Difficulty.Rank.medium;
+                    return points * (250 - (time + 1) / 5) * (int)Difficulty.Rank.medium;
             }
 
         }

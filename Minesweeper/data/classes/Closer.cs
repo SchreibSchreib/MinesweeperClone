@@ -20,13 +20,5 @@ public static class Closer
         {
             window.Close();
         }
-        //Assembly currentassembly = Assembly.GetExecutingAssembly();
-        //foreach (Window window in Application.Current.Windows)
-        //{
-        //    if (window.GetType().Assembly == currentassembly && window == currentWindow)
-        //    {
-        //        window.Close();
-        //    }
-        //}
     }
 }

@@ -139,7 +139,7 @@
                     <RowDefinition Height="43*"/>
                     <RowDefinition Height="61*"/>
                 </Grid.RowDefinitions>
-                <CheckBox x:Name="easy" Click="CheckBox_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="0">
+                <CheckBox x:Name="Easy" Click="CheckBox_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="0">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="2" ScaleY="2"/>
                     </CheckBox.LayoutTransform>
@@ -149,7 +149,7 @@
                         </Style>
                     </CheckBox.Resources>
                 </CheckBox>
-                <CheckBox x:Name="normal" Click="CheckBox_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1">
+                <CheckBox x:Name="Medium" Click="CheckBox_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="2" ScaleY="2"/>
                     </CheckBox.LayoutTransform>
@@ -159,7 +159,7 @@
                         </Style>
                     </CheckBox.Resources>
                 </CheckBox>
-                <CheckBox x:Name="hard" Click="CheckBox_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2">
+                <CheckBox x:Name="Hard" Click="CheckBox_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="2" ScaleY="2"/>
                     </CheckBox.LayoutTransform>
@@ -218,7 +218,8 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBox x:Name="NameOfPlayer" Grid.Row="1" Grid.Column="1" Margin="20,40,20,0"/>
+            <TextBox x:Name="NameOfPlayer" FontFamily="/data/Font/#Angular" Grid.Row="1" Grid.Column="1" Margin="20,40,20,0"  FontSize="60" TextAlignment="Center" BorderThickness="5" Background="#7FC5E65B" BorderBrush="Black" Foreground="#FF790021">
+            </TextBox>
             <TextBlock Text="Your Name" FontFamily="/data/Font/#Angular" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="80" FontWeight="Bold" >
                 <TextBlock.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

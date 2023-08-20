@@ -3,10 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace Minesweeper.data.Scores
 {
@@ -14,15 +12,15 @@ namespace Minesweeper.data.Scores
     {
         private static string _projectFolder = AppDomain.CurrentDomain.BaseDirectory;
         private static string _fileName = "Leaderboard.json";
-        
+
         public static string GetLeaderBoardPath() => Path.Combine(_projectFolder, _fileName);
 
         public static void WritePlayerList(Player currentPlayer)
         {
             List<Player> allPlayerDatas = LeaderboardReader.GetPlayerList();
             allPlayerDatas.Add(currentPlayer);
-            string jsonString = JsonSerializer.Serialize(allPlayerDatas);
 
+            string jsonString = JsonSerializer.Serialize(allPlayerDatas);
             if (!File.Exists(GetLeaderBoardPath()))
             {
                 File.Create(GetLeaderBoardPath()).Close();

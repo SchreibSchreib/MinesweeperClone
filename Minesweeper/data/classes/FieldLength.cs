@@ -20,12 +20,12 @@
 
             switch (difficulty)
             {
-                case "easy":
+                case "Easy":
                     X = 15;
                     Y = 15;
                     MaxNeighbourMines = 2;
                     break;
-                case "medium":
+                case "Medium":
                     X = 35;
                     Y = 35;
                     MaxNeighbourMines = 3;
@@ -33,7 +33,7 @@
                 default:
                     X = 80;
                     Y = 40;
-                    MaxNeighbourMines = 4;
+                    MaxNeighbourMines = 3;
                     break;
             }
         }

@@ -8,11 +8,14 @@ namespace Minesweeper.data.classes
 {
     public class Points
     {
-        public int Current { get; private set; }
+        public Points()
+        {
+        }
+        public int Current { get; set; }
 
         public void Add()
         {
-            Current += 10;
+            Current += 3;
         }
     }
 }

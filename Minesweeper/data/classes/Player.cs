@@ -31,6 +31,7 @@ namespace Minesweeper.data.classes
         public Difficulty CurrentDifficulty { get; private set; }
         public string Name { get; private set; }
         public Points Points { get; private set; }
+        public int SecondsNeeded { private get; set; }
 
         [JsonIgnore]
         public TimeMeasure CurrentTimer { get; private set; }

@@ -18,11 +18,17 @@ namespace Minesweeper.data.classes
         }
 
         public DispatcherTimer Seconds { get; private set; }
-        public int GetSeconds { get; private set; }
+        public int GetSeconds { get; set; }
 
         private void NewTimer_Tick(object? sender, EventArgs e)
         {
             GetSeconds++;
+        }
+
+        public void Stop(Player playerGetsHisTime)
+        {
+            Seconds.Stop();
+            playerGetsHisTime.SecondsNeeded = GetSeconds;
         }
     }
 }
