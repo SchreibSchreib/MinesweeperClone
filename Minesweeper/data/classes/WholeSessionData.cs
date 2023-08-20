@@ -1,7 +1,5 @@
 ﻿using Minesweeper.data.classes.AbstractClasses;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Minesweeper.data.classes
 {

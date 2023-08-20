@@ -1,17 +1,6 @@
 ﻿using Minesweeper.data.classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Minesweeper.data.classes.AbstractClasses;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Minesweeper
 {
@@ -23,8 +12,18 @@ namespace Minesweeper
         public CompleteGameBoardWindow(WholeSessionData currentGameField)
         {
             InitializeComponent();
+            _gameButton = currentGameField.Buttons[0];
             GamePage newSession = new GamePage(currentGameField);
             ContentFrame.Navigate(newSession);
+        }
+
+        private GameButton _gameButton;
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow backToMain = new MainWindow();
+            backToMain.Show();
+            Closer.closeWindow(_gameButton);
         }
     }
 }

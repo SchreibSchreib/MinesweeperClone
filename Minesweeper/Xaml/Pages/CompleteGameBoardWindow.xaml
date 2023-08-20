@@ -23,6 +23,13 @@
             <Viewbox x:Name="ViewBox" HorizontalAlignment="Center" VerticalAlignment="Bottom" Stretch="None">
                 <Frame x:Name="ContentFrame"/>
             </Viewbox>
-            </Grid>
+        </Grid>
+        <Button Margin="500,900,500,50" Click="Button_Click" Background="#FF9ECFF5" BorderBrush="#99000000" UseLayoutRounding="False" Content="Back" FontSize="34">
+            <Button.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="40"/>
+            </Style>
+        </Button.Resources>
+        </Button>
     </Grid>
 </Window>

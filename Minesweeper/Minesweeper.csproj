@@ -10,9 +10,11 @@
   <ItemGroup>
     <None Remove="data\Font\Angular.ttf" />
     <None Remove="data\Font\BlackAsylum.ttf" />
+    <None Remove="data\graphics\LoseFace.png" />
     <None Remove="data\graphics\Mine.png" />
     <None Remove="data\graphics\MineSweeperBackground.png" />
     <None Remove="data\graphics\MinesweeperFace.png" />
+    <None Remove="data\graphics\WinFace.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,11 +28,13 @@
   <ItemGroup>
     <Resource Include="data\Font\Angular.ttf" />
     <Resource Include="data\Font\BlackAsylum.ttf" />
+    <Resource Include="data\graphics\LoseFace.png" />
     <Resource Include="data\graphics\Mine.png" />
     <Resource Include="data\graphics\MineSweeperBackground.png" />
     <Resource Include="data\graphics\MinesweeperFace.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="data\graphics\WinFace.png" />
   </ItemGroup>
 
 </Project>

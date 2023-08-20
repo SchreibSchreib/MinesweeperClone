@@ -2,18 +2,10 @@
 using Minesweeper.data.classes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Minesweeper.data.Scores;
 
 namespace Minesweeper
@@ -56,7 +48,6 @@ namespace Minesweeper
                 Grid.SetColumn(button, int.Parse(button.Coordinates.AsString.Split(" ")[0]));
                 Grid.SetRow(button, int.Parse(button.Coordinates.AsString.Split(" ")[1]));
                 button.Click += Button_Click;
-                button.MouseRightButtonUp += Button_MouseRightButtonUp;
             }
         }
 
@@ -96,6 +87,7 @@ namespace Minesweeper
             }
             else if (IsGameFinished() || clickedButton.Behaviour)
             {
+                EvaluateWinOrLose(clickedButton);
                 _currentSession.CurrentPlayer.CurrentTimer.Stop(_currentSession.CurrentPlayer);
                 LeaderBoardWriter.WritePlayerList(_currentSession.CurrentPlayer);
             }
@@ -151,6 +143,22 @@ namespace Minesweeper
             CompleteGameBoardWindow newSession = new CompleteGameBoardWindow(currentField);
             newSession.Show();
             Closer.closeWindow(_currentSession.Buttons[0]);
+        }
+
+        private void EvaluateWinOrLose(GameButton clickedButton)
+        {
+            if (clickedButton.Behaviour)
+            {
+                string path = "/data/graphics/LoseFace.png";
+                resetButton.Content = new Image() { Source = new BitmapImage(new Uri(path, UriKind.Relative)) };
+                MessageBox.Show("You Lose :(");
+            }
+            else
+            {
+                string path = "/data/graphics/WinFace.png";
+                resetButton.Content = new Image() { Source = new BitmapImage(new Uri(path, UriKind.Relative)) };
+                MessageBox.Show("You Win :)");
+            }
         }
     }
 }
