@@ -90,6 +90,7 @@ namespace Minesweeper
             }
             if (_firstClickOfGame)
             {
+                MinesLeft.Text = (GetAllMinesOnBoard() - GetDefuses()).ToString();
                 _firstClickOfGame = false;
                 _currentSession.CurrentPlayer.CurrentTimer.Seconds.Start();
                 _currentSession.CurrentPlayer.CurrentTimer.Seconds.Tick += Seconds_Tick;
