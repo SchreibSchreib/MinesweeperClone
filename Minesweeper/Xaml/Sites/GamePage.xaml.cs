@@ -90,6 +90,12 @@ namespace Minesweeper
                 EvaluateWinOrLose(clickedButton);
                 _currentSession.CurrentPlayer.CurrentTimer.Stop(_currentSession.CurrentPlayer);
                 LeaderBoardWriter.WritePlayerList(_currentSession.CurrentPlayer);
+                if (clickedButton.Behaviour)
+                {
+                    MainWindow backToMain = new MainWindow();
+                    backToMain.Show();
+                    Closer.closeWindow(clickedButton);
+                }
             }
             MinesLeft.Text = (GetAllMinesOnBoard() - GetDefuses()).ToString();
         }
