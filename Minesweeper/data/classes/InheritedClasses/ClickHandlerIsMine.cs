@@ -16,8 +16,11 @@ namespace Minesweeper.data.classes.InheritedClasses
             if (_currentSession.FirstClickOfGame)
             {
                 _currentSession.ToggleFirstClickFalse();
+                _currentSession.RefreshPlayGround(_clickedButton.Coordinates.AsString);
+                _clickedButton.Behaviour = false;
+                _clickedButton.IsClicked = true;
             }
+            _clickedButton.UpDateButtonInformation();
         }
-
     }
 }

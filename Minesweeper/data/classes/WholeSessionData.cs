@@ -27,5 +27,10 @@ namespace Minesweeper.data.classes
         {
             FirstClickOfGame = false;
         }
+
+        public void RefreshPlayGround(string nameOfButton)
+        {
+            PlayGround[nameOfButton] = false;
+        }
     }
 }

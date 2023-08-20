@@ -80,19 +80,19 @@ namespace Minesweeper
 
         private void ExecuteGameStartAndEndings(GameButton clickedButton)
         {
+            if (IsGameFinished())
+            {
+                ExecuteWin();
+            }
+            else if (clickedButton.Behaviour && !clickedButton.IsDefused && !_firstClickOfGame)
+            {
+                ExecuteLose(clickedButton);
+            }
             if (_firstClickOfGame)
             {
                 _firstClickOfGame = false;
                 _currentSession.CurrentPlayer.CurrentTimer.Seconds.Start();
                 _currentSession.CurrentPlayer.CurrentTimer.Seconds.Tick += Seconds_Tick;
-            }
-            if (IsGameFinished())
-            {
-                ExecuteWin();
-            }
-            else if (clickedButton.Behaviour && !clickedButton.IsDefused)
-            {
-                ExecuteLose(clickedButton);
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Minesweeper.data.classes.InheritedClasses;
 using Minesweeper.data.classes.AbstractClasses;
+using System.Linq;
 
 namespace Minesweeper.data.classes
 {
@@ -47,7 +48,13 @@ namespace Minesweeper.data.classes
             if (_mineField.ContainsKey(currentButtonCoordinates))
             {
                 bool areZeroMinesAround = new MineCounter(currentButtonCoordinates, _mineField).Count == 0;
-                if (areZeroMinesAround)
+                bool isDefused = false;
+                var currentButton = _buttonList.FirstOrDefault(button => button.Coordinates.AsString == currentButtonCoordinates);
+                if (currentButton != null)
+                {
+                    isDefused = currentButton.IsDefused;
+                }
+                if (areZeroMinesAround && !isDefused)
                 {
                     foreach (string coordinatesOfNeighbourButtons in GetNeighbours(xCoords, yCoords))
                     {

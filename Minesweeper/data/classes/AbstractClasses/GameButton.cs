@@ -15,10 +15,8 @@ namespace Minesweeper.data.classes.AbstractClasses
             Coordinates = coordOfButton;
             IsClicked = false;
             IsClickable = true;
-            MinesAround = new MineCounter(Coordinates.AsString, currentGameField).Count;
             CurrentGameField = currentGameField;
             Behaviour = currentGameField[Coordinates.AsString];
-            Foreground = GetSolidColorBrushOfNumber();
             Background = GetSolidColorBrushOfBackGround();
             ColorOfButton = GetColorOfButton();
             FadingColor = GetColorAnimation();
@@ -31,9 +29,9 @@ namespace Minesweeper.data.classes.AbstractClasses
         }
 
         public bool IsClicked { get; set; }
+        public bool Behaviour { get; set; }
         public int MinesAround { get; protected set; }
         public Coordinates Coordinates { get; protected set; }
-        public bool Behaviour { get; protected set; }
         public bool IsDefused { get; protected set; }
         public bool IsClickable { get; protected set; }
 
@@ -105,6 +103,8 @@ namespace Minesweeper.data.classes.AbstractClasses
         {
             if (IsClicked && !IsDefused)
             {
+                MinesAround = new MineCounter(Coordinates.AsString, CurrentGameField).Count;
+                Foreground = GetSolidColorBrushOfNumber();
                 Content = MinesAround.ToString();
             }
             else if (IsDefused)
@@ -125,7 +125,5 @@ namespace Minesweeper.data.classes.AbstractClasses
             ColorOfButton = GetColorOfButton();
             FadingColor = GetColorAnimation();
         }
-
-
     }
 }
