@@ -7,7 +7,6 @@ namespace Minesweeper.data.classes.InheritedClasses
     {
         public ClickHandlerNoMine(GameButton clickedButton, WholeSessionData currentSession) : base (clickedButton, currentSession)
         {
-            currentSession.CurrentPlayer.Points.Add();
         }
 
         public override void Handle()
@@ -17,6 +16,7 @@ namespace Minesweeper.data.classes.InheritedClasses
                 _currentSession.ToggleFirstClickFalse();
             }
             _clickedButton.IsClicked = true;
+            _currentSession.CurrentPlayer.Points.Add();
             _clickedButton.UpDateButtonInformation();
         }
     }

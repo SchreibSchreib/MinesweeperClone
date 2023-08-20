@@ -24,7 +24,7 @@ namespace Minesweeper
     {
         public MainWindow()
         {
-            _difficulty = new Difficulty();
+            _difficulty = new Difficulty("Medium");
             InitializeComponent();
         }
 
@@ -44,7 +44,7 @@ namespace Minesweeper
 
         private void SetDifficulty(CheckBox checkBox)
         {
-            _difficulty = new Difficulty(checkBox);
+            _difficulty = new Difficulty(checkBox.Name);
         }
 
         private void UncheckOtherCheckBoxes(CheckBox checkBox)
@@ -68,18 +68,26 @@ namespace Minesweeper
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            string name = NameOfPlayer.Text;
-            Points newPoints = new Points();
-            Player newPlayer = new Player(name, newPoints, _difficulty);
-            WholeSessionData currentField = new WholeSessionData(20, 20, newPlayer);
-            CompleteGameBoardWindow newGame = new CompleteGameBoardWindow(currentField);
-            newGame.Show();
-            this.Close();
+            string enteredText = NameOfPlayer.Text;
+            if (!string.IsNullOrWhiteSpace(enteredText))
+            {
+                string name = NameOfPlayer.Text;
+                Points newPoints = new Points();
+                Player newPlayer = new Player(name, newPoints, _difficulty, new TimeMeasure());
+                WholeSessionData currentField = new WholeSessionData(newPlayer);
+                CompleteGameBoardWindow newGame = new CompleteGameBoardWindow(currentField);
+                newGame.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Bitte Namen eingeben.");
+            }
         }
 
         private void leaderBoardButton_Click(object sender, RoutedEventArgs e)
         {
-            LeaderBoard leaderBoard = new LeaderBoard();
+            LeaderBoard leaderBoard = new LeaderBoard(this);
             FrameForLeaderBoard.Navigate(leaderBoard);
         }
     }

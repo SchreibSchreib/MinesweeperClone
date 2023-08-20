@@ -22,8 +22,9 @@ namespace Minesweeper.Xaml.Sites
     /// </summary>
     public partial class LeaderBoard : Page
     {
-        public LeaderBoard()
+        public LeaderBoard(MainWindow thisSite)
         {
+            _thisSite = thisSite;
             _playerData = LeaderboardReader.GetPlayerList();
             SortData();
             _splittedData = SplitData();
@@ -31,6 +32,7 @@ namespace Minesweeper.Xaml.Sites
             WriteToLeaderBoard();
         }
 
+        private MainWindow _thisSite;
         private List<Player> _playerData;
         private string[][] _splittedData;
 
@@ -72,12 +74,7 @@ namespace Minesweeper.Xaml.Sites
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            var mainWindow = Application.Current.MainWindow as MainWindow;
-            if (mainWindow != null)
-            {
-                // Leere den Frame, um zur Hauptansicht zurückzukehren
-                mainWindow.FrameForLeaderBoard.NavigationService.Navigate(null);
-            }
+            _thisSite.FrameForLeaderBoard.NavigationService.Navigate(null);
         }
     }
 }

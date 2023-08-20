@@ -9,10 +9,11 @@ namespace Minesweeper.data.classes
     public static class LogicCheckup
     {
         private static Random _randomMinePicker = new Random();
-        private static int _maxMines = CalculateMaxMines();
+        private static int _maxMines;
 
-        public static Dictionary<string, bool> Check(Dictionary<string, bool> rearrangeMines)
+        public static Dictionary<string, bool> Check(Dictionary<string, bool> rearrangeMines, int maxMines)
         {
+            _maxMines = maxMines;
             foreach (KeyValuePair<string, bool> entry in rearrangeMines)
             {
                 string currentButton = entry.Key;

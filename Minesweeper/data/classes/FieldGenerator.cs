@@ -8,14 +8,15 @@ namespace Minesweeper.data.classes
 {
     public class FieldGenerator
     {
-        public FieldGenerator(int xAxis, int yAxis)
+        public FieldGenerator(int highestXAxis, int highestYAxis)
         {
-            _highestXAxis = xAxis;
-            _highestYAxis = yAxis;
+            _highestXAxis = highestXAxis;
+            _highestYAxis = highestYAxis;
             PlayGround = CreatePrototypePlayGround();
         }
 
-        public Dictionary<string, bool> PlayGround {  get; private set; }
+        public Dictionary<string, bool> PlayGround { get; private set; }
+
         private MineGenerator _mineGenerator = new MineGenerator();
         private int _highestXAxis;
         private int _highestYAxis;

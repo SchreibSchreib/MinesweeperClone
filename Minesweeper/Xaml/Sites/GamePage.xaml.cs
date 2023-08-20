@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Minesweeper.data.Scores;
 
 namespace Minesweeper
 {
@@ -22,13 +23,13 @@ namespace Minesweeper
         public GamePage(WholeSessionData currentGameField)
         {
             InitializeComponent();
-            _currentGameField = currentGameField;
-            _buttonsList = _currentGameField.Buttons;
+            _currentSession = currentGameField;
+            _buttonsList = _currentSession.Buttons;
             _gridLengthCalculator = new GridLengthCalculator(_buttonsList);
             _xMaxLength = _gridLengthCalculator.CalculateX();
             _yMaxLength = _gridLengthCalculator.CalculateY();
             _undiscoveredMines = GetAllMinesOnBoard();
-            _seconds = _currentGameField.CurrentPlayer.CurrentTimer.GetSeconds;
+            _seconds = _currentSession.CurrentPlayer.CurrentTimer.GetSeconds;
             _firstClickOfGame = true;
             SpawnGrid = GetGameGrid();
             MinesLeft.Text = _undiscoveredMines.ToString();
@@ -36,7 +37,7 @@ namespace Minesweeper
             LoadButtonsToGrid();
         }
 
-        private WholeSessionData _currentGameField;
+        private WholeSessionData _currentSession;
         private List<GameButton> _buttonsList;
         private GridLengthCalculator _gridLengthCalculator;
         private bool _firstClickOfGame;
@@ -52,8 +53,8 @@ namespace Minesweeper
             foreach (GameButton button in _buttonsList)
             {
                 SpawnGrid.Children.Add(button);
-                Grid.SetRow(button, int.Parse(button.Coordinates.AsString.Split(" ")[0]));
-                Grid.SetColumn(button, int.Parse(button.Coordinates.AsString.Split(" ")[1]));
+                Grid.SetColumn(button, int.Parse(button.Coordinates.AsString.Split(" ")[0]));
+                Grid.SetRow(button, int.Parse(button.Coordinates.AsString.Split(" ")[1]));
                 button.Click += Button_Click;
                 button.MouseRightButtonUp += Button_MouseRightButtonUp;
             }
@@ -85,15 +86,34 @@ namespace Minesweeper
             return defuses;
         }
 
-        private void UpdateGameInformation()
+        private void UpdateGameInformation(GameButton clickedButton)
         {
-            if (_firstClickOfGame)
+            if (_firstClickOfGame && !clickedButton.Behaviour)
             {
-                _firstClickOfGame = _currentGameField.FirstClickOfGame;
-                _currentGameField.CurrentPlayer.CurrentTimer.Seconds.Start();
-                _currentGameField.CurrentPlayer.CurrentTimer.Seconds.Tick += Seconds_Tick; ;
+                _firstClickOfGame = _currentSession.FirstClickOfGame;
+                _currentSession.CurrentPlayer.CurrentTimer.Seconds.Start();
+                _currentSession.CurrentPlayer.CurrentTimer.Seconds.Tick += Seconds_Tick; ;
+            }
+            else if (IsGameFinished() || clickedButton.Behaviour)
+            {
+                _currentSession.CurrentPlayer.CurrentTimer.Stop(_currentSession.CurrentPlayer);
+                LeaderBoardWriter.WritePlayerList(_currentSession.CurrentPlayer);
             }
             MinesLeft.Text = (GetAllMinesOnBoard() - GetDefuses()).ToString();
+        }
+
+        private bool IsGameFinished()
+        {
+            int clickedButtons = 0;
+            int ButtonsToClickForWin = _buttonsList.Count - GetAllMinesOnBoard();
+            foreach (GameButton button in _buttonsList)
+            {
+                if (button.IsClicked)
+                {
+                    clickedButtons++;
+                }
+            }
+            return clickedButtons == ButtonsToClickForWin;
         }
 
         private void Seconds_Tick(object? sender, EventArgs e)
@@ -104,24 +124,33 @@ namespace Minesweeper
 
         private void Button_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            UpdateGameInformation();
+            var clickedButton = sender as GameButton;
+            if (clickedButton != null)
+            {
+                UpdateGameInformation(clickedButton);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            UpdateGameInformation();
+            var clickedButton = sender as GameButton;
+            if (clickedButton != null)
+            {
+                UpdateGameInformation(clickedButton);
+            }
+
         }
 
         private void resetButton_Click(object sender, RoutedEventArgs e)
         {
-            string name = _currentGameField.CurrentPlayer.Name;
+            string name = _currentSession.CurrentPlayer.Name;
             Points newPoints = new Points();
-            Difficulty currentDifficulty = _currentGameField.CurrentPlayer.CurrentDifficulty;
-            Player newPlayer = new Player(name, newPoints, currentDifficulty);
-            WholeSessionData currentField = new WholeSessionData(20, 20, newPlayer);
+            Difficulty currentDifficulty = _currentSession.CurrentPlayer.CurrentDifficulty;
+            Player newPlayer = new Player(name, newPoints, currentDifficulty, new TimeMeasure());
+            WholeSessionData currentField = new WholeSessionData(newPlayer);
             CompleteGameBoardWindow newSession = new CompleteGameBoardWindow(currentField);
             newSession.Show();
-            Closer.closeWindow(_currentGameField.Buttons[0]);
+            Closer.closeWindow(_currentSession.Buttons[0]);
         }
     }
 }

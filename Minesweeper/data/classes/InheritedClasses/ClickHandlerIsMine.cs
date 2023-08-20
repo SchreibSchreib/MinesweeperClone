@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection.Metadata;
+using Minesweeper.data.Scores;
+using System.Windows;
 
 namespace Minesweeper.data.classes.InheritedClasses
 {
@@ -18,7 +20,6 @@ namespace Minesweeper.data.classes.InheritedClasses
 
         public override void Handle()
         {
-            _clickedButton.IsClicked = true;
             MainWindow backToMain = new MainWindow();
             backToMain.Show();
             Closer.closeWindow(_clickedButton);
