@@ -1,6 +1,4 @@
-﻿using System.Windows.Threading;
-
-namespace Minesweeper.data.classes.AbstractClasses
+﻿namespace Minesweeper.data.classes.AbstractClasses
 {
     public abstract class ClickHandler
     {

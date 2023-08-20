@@ -1,8 +1,6 @@
 ﻿using Minesweeper.data.classes.AbstractClasses;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
 
 namespace Minesweeper.data.classes.InheritedClasses
 {

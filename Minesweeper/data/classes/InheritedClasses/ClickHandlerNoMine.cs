@@ -1,11 +1,10 @@
 ﻿using Minesweeper.data.classes.AbstractClasses;
-using System.Collections.Generic;
 
 namespace Minesweeper.data.classes.InheritedClasses
 {
     internal class ClickHandlerNoMine : ClickHandler
     {
-        public ClickHandlerNoMine(GameButton clickedButton, WholeSessionData currentSession) : base (clickedButton, currentSession)
+        public ClickHandlerNoMine(GameButton clickedButton, WholeSessionData currentSession) : base(clickedButton, currentSession)
         {
         }
 
